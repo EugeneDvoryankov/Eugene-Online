@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>[OnlineNow AB]</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!-- Bootstrap icons -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <header>
+
+    <!-- ===== Top header ===== -->
+    <div class="top-header position-relative text-white container-fluid d-flex align-items-center justify-content-end py-3 px-4">
+        <!-- Position absolute to place in center -->
+         <!-- Do not display on the smallest devices -->
+        <div class="absolute-center d-none d-md-flex align-items-center">
+          <span class="mr-3">
+            Vill ni också vara i rampljuset?
+          </span>
+          <button class="btn btn-light btn-sm">Kontakta oss</button>
+        </div>
+
+        <div class="d-flex">
+          <a class="btn btn-link text-white" href="index.html" role="button">Hem</a>
+          <a class="btn btn-link text-white" href="omoss.html" role="button">Om oss</a>
+          <button class="btn btn-link text-white">Tjänster</button>
+        </div>
+    </div>
+
+    <!-- ===== Bottom header ===== -->
+    <div class="bottom-header border-bottom">
+      <div class="container-fluid d-flex align-items-center justify-content-between py-3 px-4">
+
+        <input type="checkbox" id="hamburger-toggle" />
+        <label for="hamburger-toggle" class="hamburger d-flex align-items-center">
+          <span class="mr-2">&#9776;</span> <!-- Unicode hamburger menu -->
+          <span class="menu-text">Meny</span>
+        </label>
+
+        <div id="hamburger-container" class="container-fluid d-flex flex-row">
+          <div id="hamburger-menu" class="d-flex flex-column justify-content-between shadow">
+            <div class="list-group">
+              <a href="index.html" class="hamburger-menu-item list-group-item list-group-item-action active" aria-current="true">
+                Hem
+              </a>
+              <a class="hamburger-menu-item list-group-item list-group-item-action">Tjänster</a>
+              <a href="omoss.html" class="hamburger-menu-item list-group-item list-group-item-action">Om oss</a>
+              <a class="hamburger-menu-item list-group-item list-group-item-action">Kontakta oss</a>
+            </div>
+
+            <span class="px-4 py-4">ONLINENOW AB</span>
+          </div>
+
+          <label for="hamburger-toggle" class="flex-fill"><!-- Close --></label>
+        </div>
+
+        <div class="logo text-center">
+          <i class="bi bi-geo-alt-fill text-branding"></i>
+          ONLINENOW AB
+        </div>
+
+        <button class="btn btn-outline-primary btn-sm">Logga in</button>
+
+      </div>
+    </div>
+
+  </header>
+
+  <!-- The background picture is a stock image from https://images.pexels.com/photos/2956376/pexels-photo-2956376.jpeg?cs=srgb&dl=pexels-tiana-18128-2956376.jpg&fm=jpg
+-->
+
+  <!-- py-5 is Bootstramp for extra large vertical padding. py goes from 0 to -->
+  <div class="container py-5">
+
+    <!-- Used example from https://getbootstrap.com/docs/4.0/components/card/ -->
+    <div class="card-deck">
+
+      <!-- These cards should be replaced with JS map() function in Lab2 -->
+      <div class="card text-center" style="width: 18rem;">
+        <div class="card-body d-flex flex-column justify-content-center">
+          <h3 class="card-title">Perfect design</h3>
+          <p class="card-text">We specialise in creating cusom website to help your business stand out from your competition</p>
+        </div>
+      </div>
+
+      <!-- These cards should be replaced with JS map() function in Lab2 -->
+      <div class="card text-center" style="width: 18rem;">
+        <div class="card-body d-flex flex-column justify-content-center">
+          <h3 class="card-title">Fast delivery</h3>
+          <p class="card-text">Many webdesigner companies delviery within months, just to build one simple website.
+          We create your webpage within weeks. No exceptions!
+          </p>        
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card-deck py-5">
+
+      <!-- These cards should be replaced with JS map() function in Lab2 -->
+      <div class="card text-center" style="width: 18rem;">
+        <div class="card-body d-flex flex-column justify-content-center">
+          <h3 class="card-title">Fair price</h3>
+          <p class="card-text">Affordable webdesign for businesses to make their visitors into happy customers</p>
+        </div>
+      </div>
+
+      <!-- These cards should be replaced with JS map() function in Lab2 -->
+      <div class="card text-center" style="width: 18rem;">
+        <div class="card-body d-flex flex-column justify-content-center">
+          <h3 class="card-title">Satisfied customers</h3>
+          <p class="card-text">Our goal is to reach 100 percent customer satisfaction</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-light text-dark py-4">
+    <div class="container mb-4">
+      <div class="row">
+        <div class="col-sm d-flex flex-column">
+          <span class="font-weight-bold">Tjänster</span>
+          <a>Konsultation</a>
+          <a>Webbutveckling</a>
+          <a>Apputveckling</a>
+          <a>Drift & Underhåll</a>
+        </div>
+        <div class="col-sm d-flex flex-column">
+          <span class="font-weight-bold">Företaget</span>
+          <a class= "font-weight-bold" href="omoss.html">Om oss</a>
+          <a>Kontakta oss</a>
+          <a>Blogg</a>
+          <a>Karriär</a>
+        </div>
+        <!-- Logga och sociala medier -->
+        <div class="col-sm-6 d-flex flex-column align-items-start align-items-sm-end">
+          <span class="logo text-muted">ONLINENOW AB</span>
+          <div id="footer-socials" class="d-flex flex-row">
+            <a class="mr-3"><i class="bi bi-twitter-x text-muted"></i></a>
+            <a class="mr-3"><i class="bi bi-linkedin text-muted"></i></a>
+            <a class="mr-3"><i class="bi bi-dribbble text-muted"></i></a>
+            <a><i class="bi bi-behance text-muted"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container text-center text-muted">
+      &copy; 2026 OnlineNow AB. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+body {
+  background-image: url("./home-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+a {
+  /* Anchor tags without href should show pointer cursor(for mockup) */
+  cursor: pointer;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+
+.text-branding {
+  color: #574bfc;
+}
+
+/* Top header */
+.top-header {
+  background-color: #574bfc;
+  font-size: 1.1rem;
+}
+
+.top-header .container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.top-header .btn-link {
+  text-decoration: none; 
+}
+
+/* Bottom header */
+.bottom-header {
+  background-color: #ffffff;
+  font-size: 1rem;
+}
+
+.bottom-header .menu-text {
+  font-size: 0.95rem;
+}
+
+.bottom-header .container {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+/* Hamburger icon */
+.hamburger {
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+/* Container holds both menu and "close area" */
+#hamburger-container {
+  /* display: none; */    /* Hidden by default */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 5;   /* Bootstrap card uses position relative */
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  translate: -100% 0%;    /* Hidden by default */
+  transition: translate 0.3s ease-in-out;
+}
+
+#hamburger-menu {
+  min-width: 25vw;
+  background-color: #ffffff;
+}
+
+/* Add spacing between icon and text in hamburger menu */
+#hamburger-menu a > *:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+#hamburger-toggle {
+  display: none;
+}
+
+#hamburger-toggle:checked ~ #hamburger-container {
+  translate: 0% 0%;
+}
+
+.hamburger-menu-item {
+  border: 0;
+}
+
+.hamburger-menu-item.active {
+  color: #fff;
+  background-color: #574bfc;
+  /* Remove default list group styling */
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Logo */
+.logo {
+  font-size: 1.7rem;
+}
+
+#footer-socials a {
+  font-size: 1.5rem;
+}

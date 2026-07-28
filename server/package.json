@@ -1,0 +1,50 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "source": "src/index.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "nodemon --legacy-watch --watch src --ext ts --exec tsx src/index.ts",
+    "dev-tsx": "tsx watch src/index.ts",
+    "build": "pkgroll",
+    "test": "vitest",
+    "lint": "eslint src/**/*.ts test/**/*.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "2.8",
+    "dotenv": "^17.3.1",
+    "express": "5.2",
+    "express-validator": "^7.3.1",
+    "pg": "8.18",
+    "pg-hstore": "2.3",
+    "sequelize": "6.37",
+    "sqlite3": "^5.1.7",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.4.1",
+    "@eslint/eslintrc": "^3.3.3",
+    "@eslint/js": "^9.39.2",
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "2.8",
+    "@types/express": "5.0",
+    "@types/supertest": "6.0",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "eslint": "^9.39.2",
+    "eslint-config-airbnb-extended": "^3.0.1",
+    "nodemon": "^3.1.11",
+    "pkgroll": "2.23",
+    "supertest": "7.2",
+    "tsx": "4.21",
+    "typescript": "5.9",
+    "typescript-eslint": "^8.54.0",
+    "vitest": "3.2"
+  }
+}

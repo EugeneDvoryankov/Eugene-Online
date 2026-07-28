@@ -1,0 +1,4 @@
+<!-- Test component -->
+<template>
+    🅱️
+</template>
