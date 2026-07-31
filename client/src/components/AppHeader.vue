@@ -2,126 +2,47 @@
   <header>
     <input type="checkbox" id="hamburger-toggle" />
 
-    <div class="top-header text-white">
-      <div
-        class="position-relative container-fluid d-flex align-items-center justify-content-end py-3 px-4"
-      >
-        <!-- Hidden on smaller screens -->
-        <div class="center-absolute mx-auto d-none d-lg-flex align-items-center" style="gap: 1rem">
-          <span> Vill ni också vara i rampljuset? </span>
-          <RouterLink to="/contact">
-            <button class="btn btn-light btn-sm">Kontakta oss</button>
-          </RouterLink>
-        </div>
+    <div class="header">
 
+      <RouterLink to="/" class="logo-link d-none d-md-flex">
+        
+        <img 
+            src="./onlinenow-logo.svg"
+            alt="OnlineNow AB"
+            class="company-logo"
+          />  
+
+        <span class="company-name text-white">ONLINENOW AB</span>
+
+      </RouterLink>
+
+      <div class="header-right">
         <div class="d-flex">
-          <RouterLink to="/" class="btn btn-link text-white">Hem</RouterLink>
           <RouterLink
-            to="/about-us"
-            class="btn btn-link text-white"
-          >
-            Om oss
-          </RouterLink>
-          <RouterLink
-            to="/products"
-            class="btn btn-link text-white"
-          >
-            Våra tjänster
-          </RouterLink>
-          <RouterLink to="/contact" class="btn btn-link text-white">Kontakta oss</RouterLink>
-        </div>
-      </div>
-    </div>
-
-    <div class="bottom-header position-relative border-bottom">
-      <div
-        class="container-fluid d-flex align-items-center justify-content-between py-3 px-4"
-      >
-        <label
-          for="hamburger-toggle"
-          class="hamburger d-flex align-items-center"
-        >
-          <span class="mr-2">&#9776;</span>
-          <span class="menu-text">Meny</span>
-        </label>
-
-        <RouterLink to="/" class="center-absolute no-router-underline d-none d-md-block">
-          <div class="logo text-center">
-            <span class="logo-placeholder mr-2"></span>
-            ONLINENOW AB
-          </div>
-        </RouterLink>
-
-        <div class="d-flex align-items-center gap-3">
-          <BookingModal />
-
-          <template v-if="!user">
-            <RouterLink
-              to="/login"
-              class="btn btn-primary btn-sm"
-            >
-              Logga in
-            </RouterLink>
-          </template>
-          <template v-else>
-            <div class="header-user d-flex gap-1 align-items-center">
-              <BDropdown
-                :text="`${user.companyName}${user.admin ? ' (Admin)' : ''}`"
-                variant="outline-dark"
-                size="sm"
-                class="me-2"
-              >
-                <BDropdownItem v-if="user.admin === true" to="/dashboard">Dashboard</BDropdownItem>
-                <BDropdownItem to="/profile">Min profil</BDropdownItem>
-                <BDropdownItem @click="logout">Logga ut</BDropdownItem>
-              </BDropdown>
-            </div>
-          </template>
-        </div>
-      </div>
-    </div>
-
-    <div id="hamburger-container" class="container-fluid d-flex flex-row">
-      <div
-        id="hamburger-menu"
-        class="d-flex flex-column justify-content-between shadow"
-      >
-        <div class="list-group">
-          <RouterLink
-            to="/"
-            class="hamburger-menu-item list-group-item list-group-item-action"
-            exact-active-class="active"
-          >
+            to="/" class="btn btn-link text-white">
             Hem
           </RouterLink>
           <RouterLink
-            to="/about-us"
-            class="hamburger-menu-item list-group-item list-group-item-action"
-            exact-active-class="active"
+            to="/about-us" class="btn btn-link text-white"
           >
             Om oss
           </RouterLink>
           <RouterLink
-            to="/products"
-            class="hamburger-menu-item list-group-item list-group-item-action"
-            exact-active-class="active"
+            to="/products" class="btn btn-link text-white"
           >
             Våra tjänster
           </RouterLink>
-          <RouterLink
-            to="/contact"
-            class="hamburger-menu-item list-group-item list-group-item-action"
-            exact-active-class="active"
-          >
-            Kontakta oss
+          <RouterLink 
+            to="/contact" class="btn btn-link text-white"
+            >Kontakta oss
           </RouterLink>
         </div>
-
-        <span class="px-4 py-4">ONLINENOW AB</span>
       </div>
-
-      <label for="hamburger-toggle" class="flex-fill"></label>
     </div>
+
+    
+
+    
   </header>
 </template>
 
@@ -202,6 +123,55 @@ export default {
 </script>
 
 <style scoped>
+
+.header {
+  overflow: hidden;
+  background-color: #0d6efd;
+  padding: 20px 10px;
+}
+
+.header a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.header a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.header-right {
+  float: right;
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .header-right {
+    float: none;
+  }
+}
+
 .top-header {
   background-color: #574bfc;
   color: white;
@@ -227,13 +197,21 @@ export default {
   font-size: 1.4rem;
 }
 
-.logo-placeholder {
-  display: inline-block;
-  width: 40px;
+
+.logo-link  {
+  float: left;
+  align-items: center;
+  padding: 0;
+  text-decoration: none;
+  gap: 5px;
+}
+
+.company-logo {
+  display: block;
+  width: auto;
   height: 40px;
-  background-color: #574bfc;
-  border-radius: 50%;
-  vertical-align: middle;
+  max-width: 220px;
+  object-fit: contain;
 }
 
 /* https://stackoverflow.com/questions/44808474 */

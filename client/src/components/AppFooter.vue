@@ -22,7 +22,7 @@
           class="col-md-6 d-flex flex-column align-items-md-end align-items-start"
         >
           <span class="logo text-muted">ONLINENOW AB</span>
-          <span class="text-muted">Sveriges ledande konsultbolag</span>
+          <span class="text-muted">Sveriges mest unika konsultbolag</span>
         </div>
       </div>
 

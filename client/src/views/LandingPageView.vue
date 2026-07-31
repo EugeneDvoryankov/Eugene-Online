@@ -1,16 +1,6 @@
 <script lang="ts">
-import DICELogo from '@/components/icons/DICELogo.vue';
-import EmbarkStudiosLogo from '@/components/icons/EmbarkStudiosLogo.vue';
-import GithubLogo from '@/components/icons/GithubLogo.vue';
-import GitlabLogo from '@/components/icons/GitlabLogo.vue';
-import IKEALogo from '@/components/icons/IKEALogo.vue';
-import IZettleLogo from '@/components/icons/IZettleLogo.vue';
-import KingLogo from '@/components/icons/KingLogo.vue';
 import LandingPageDrawing from '@/components/icons/LandingPageDrawing.vue';
 import LandingPageTeamDrawing from '@/components/icons/LandingPageTeamDrawing.vue';
-import MicrosoftLogo from '@/components/icons/MicrosoftLogo.vue';
-import TruecallerLogo from '@/components/icons/TruecallerLogo.vue';
-import VolvoLogo from '@/components/icons/VolvoLogo.vue';
 import { BButton, BContainer } from 'bootstrap-vue-next';
 
 export default {
@@ -18,16 +8,6 @@ export default {
     BContainer,
     BButton,
     LandingPageDrawing,
-    GithubLogo,
-    MicrosoftLogo,
-    GitlabLogo,
-    VolvoLogo,
-    EmbarkStudiosLogo,
-    DICELogo,
-    KingLogo,
-    TruecallerLogo,
-    IKEALogo,
-    IZettleLogo,
     LandingPageTeamDrawing,
   },
 };
@@ -41,100 +21,19 @@ export default {
     <BContainer fluid tag="section" class="vh-70 d-flex flex-column flex-md-row">
       <div class="order-2 order-md-1 flex-1 d-flex flex-column justify-content-center gap-3">
         <h1>Vi löser det <span class="fst-italic">tråkiga</span> tekniska</h1>
-        <h3 class="fs-4 text-secondary">Sveriges största konsultbolag specialiserad inom allting IT vill jobba med dig, liten som stor</h3>
+        <h3 class="fs-4 text-secondary">Sveriges mest unika konsultbolag specialiserad inom allting IT vill jobba med dig, liten som stor</h3>
         <div class="d-flex flex-row gap-3 mt-4">
           <BButton variant="light" size="lg" to="/products">Våra tjänster</BButton>
           <BButton variant="primary" size="lg" to="/register">Registrera dig</BButton>
         </div>
       </div>
       <div class="order-1 order-md-2 position-relative flex-1 d-flex justify-content-center align-items-center">
-        <!-- Quotes from clients around the drawing -->
-        <!-- Replaced with icons -->
-        <!-- <span class="d-none d-md-block position-absolute top-50 left-80 fs-6 fst-italic text-secondary">"Pålitliga"</span>
-        <span class="d-none d-md-block position-absolute top-40 left-10 fs-6 fst-italic text-secondary">"Kompetent"</span>
-        <span class="d-none d-md-block position-absolute top-70 left-70 fs-6 fst-italic text-secondary">"Professionell service"</span>
-        <span class="d-none d-md-block position-absolute top-80 left-20 fs-6 fst-italic text-secondary">"...vet inte vad jag gjort utan dom"</span>
-        <span class="d-none d-md-block position-absolute top-20 left-20 fs-6 fst-italic text-secondary">"...tydligt och prisvärt"</span>
-        <span class="d-none d-md-block position-absolute top-20 left-70 fs-6 fst-italic text-secondary">"Hjälpte mig som nystartad"</span> -->
-        <!-- <i class="bi bi-braces"></i> -->
         <LandingPageDrawing class="w-50" />
       </div>
     </BContainer>
 
-    <!-- Container with company references -->
-    <BContainer fluid class="d-flex flex-row overflow-hidden">
-      <!-- Row -->
-      <div class="reference-company-row d-flex flex-basis-100">
-        <!-- First segment -->
-        <div class="reference-company">
-          <GithubLogo class="w-100" />
-        </div>
-        <div class="reference-company">
-          <MicrosoftLogo class="w-100" />
-        </div>
-        <div class="reference-company">
-          <EmbarkStudiosLogo class="w-100" />
-        </div>
-        <div class="reference-company">
-          <GitlabLogo class="w-100" />
-        </div>
-        <div class="reference-company">
-          <VolvoLogo class="w-100" />
-        </div>
-        <!-- Second segment -->
-        <div class="reference-company">
-          <KingLogo class="w-50" />
-        </div>
-        <div class="reference-company">
-          <DICELogo class="w-100" />
-        </div>
-        <div class="reference-company">
-          <TruecallerLogo class="w-100" />
-        </div>
-        <div class="reference-company">
-          <IKEALogo class="w-75" />
-        </div>
-        <div class="reference-company">
-          <IZettleLogo class="w-100" />
-        </div>
-      </div>
+  
 
-      <!-- Replacement row -->
-      <div class="reference-company-row-replacement d-flex flex-basis-100">
-        <!-- First segment -->
-        <div class="reference-company">
-          <GithubLogo class="w-100" />
-        </div>
-        <div class="reference-company">
-          <MicrosoftLogo class="w-100" />
-        </div>
-        <div class="reference-company">
-          <EmbarkStudiosLogo class="w-100" />
-        </div>
-        <div class="reference-company">
-          <GitlabLogo class="w-100" />
-        </div>
-        <div class="reference-company">
-          <VolvoLogo class="w-100" />
-        </div>
-        <!-- Second segment -->
-        <div class="reference-company">
-          <KingLogo class="w-50" />
-        </div>
-        <div class="reference-company">
-          <DICELogo class="w-100" />
-        </div>
-        <div class="reference-company">
-          <TruecallerLogo class="w-100" />
-        </div>
-        <div class="reference-company">
-          <IKEALogo class="w-75" />
-        </div>
-        <div class="reference-company">
-          <IZettleLogo class="w-100" />
-        </div>
-      </div>
-    </BContainer>
 
     <BContainer fluid tag="section">
       <div class="w-100 d-flex flex-column flex-md-row gap-4">
@@ -151,72 +50,35 @@ export default {
             <h3>Möt teamet</h3>
             <i class="bi bi-arrow-up-right"></i>
           </RouterLink>
-          <!-- <span>Vi är ett senior team med bakgrund inom systemutveckling, arkitektur och IT-ledning från olika branscher.</span> -->
         </div>
-        <!-- <div class="employee-columns d-none d-sm-block">
-            <BRow class="flex-nowrap">
-              <BCol>
-                <div class="employee-card rounded-3 d-flex align-items-stretch gap-1">
-                  <div class="d-flex flex-column">
-                    <span class="text-nowrap">Sven Svensson</span>
-                    <span class="fw-bold text-nowrap">iOS Utvecklare</span>
-                  </div>
-                </div>
-              </BCol>
-
-              <BCol>
-                <div class="employee-card rounded-3 d-flex align-items-stretch gap-1">
-                  <div class="d-flex flex-column">
-                    <span class="text-nowrap">Anna Johansson</span>
-                    <span class="fw-bold text-nowrap">Webbutvecklare</span>
-                  </div>
-                </div>
-              </BCol>
-            </BRow>
-
-            <BRow class="flex-nowrap">
-              <BCol>
-                <div class="employee-card rounded-3 d-flex align-items-stretch gap-1">
-                  <div class="d-flex flex-column">
-                    <span class="text-nowrap">Bengt Bengtsson</span>
-                    <span class="fw-bold text-nowrap">DevOps</span>
-                  </div>
-                </div>
-              </BCol>
-
-              <BCol>
-                <div class="employee-card rounded-3 d-flex align-items-stretch gap-1">
-                  <div class="d-flex flex-column">
-                    <span class="text-nowrap">Peter Petersson</span>
-                    <span class="fw-bold text-nowrap">QA Testare</span>
-                  </div>
-                </div>
-              </BCol>
-            </BRow>
-
-            <BRow class="flex-nowrap">
-              <BCol>
-                <div class="employee-card rounded-3 d-flex align-items-stretch gap-1">
-                  <div class="d-flex flex-column">
-                    <span class="text-nowrap">Olof Olofsson</span>
-                    <span class="fw-bold text-nowrap">Brand Manager</span>
-                  </div>
-                </div>
-              </BCol>
-
-              <BCol>
-                <div class="employee-card rounded-3 d-flex align-items-stretch gap-1">
-                  <div class="d-flex flex-column">
-                    <span class="text-nowrap">Karl Karlsson</span>
-                    <span class="fw-bold text-nowrap">UX Designer</span>
-                  </div>
-                </div>
-              </BCol>
-            </BRow>
-          </div> -->
       </div>
     </BContainer>
   </BContainer>
+
+  <!-- WhatsApp chat button -->
+  <div class="whatsapp-container">
+    <a
+      href="https://wa.me/46736871302?text=Hej!%20Jag%20vill%20chatta%20med%20OnlineNow%20AB"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="whatsapp-button"
+      aria-label="Chatta med oss på WhatsApp"
+    >
+      <span class="whatsapp-icon">
+        <svg
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            d="M20.52 3.48A11.8 11.8 0 0012.12 0C5.58 0 .25 5.32.25 11.87c0 2.09.55 4.14 1.58 5.94L0 24l6.37-1.67a11.8 11.8 0 005.75 1.47h.01c6.54 0 11.87-5.33 11.87-11.87 0-3.17-1.23-6.15-3.48-8.45zm-8.4 18.33h-.01a9.83 9.83 0 01-5-1.36l-.36-.21-3.78.99 1.01-3.69-.24-.38a9.86 9.86 0 01-1.52-5.29C2.22 6.39 6.65 1.96 12.12 1.96c2.63 0 5.11 1.03 6.97 2.89a9.79 9.79 0 012.89 6.97c0 5.46-4.44 9.99-9.86 9.99zm5.41-7.41c-.3-.15-1.76-.87-2.04-.97-.27-.1-.47-.15-.66.15-.19.3-.76.97-.93 1.17-.17.2-.34.22-.64.07-.3-.15-1.24-.46-2.36-1.46-.87-.77-1.46-1.73-1.63-2.02-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.5.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.66-1.6-.91-2.19-.24-.58-.48-.5-.66-.5h-.56c-.2 0-.52.08-.8.37-.27.3-1.04 1.01-1.04 2.46 0 1.45 1.07 2.85 1.22 3.05.15.2 2.08 3.18 5.05 4.46.71.31 1.27.49 1.7.63.72.23 1.38.2 1.9.12.58-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.4-.07-.12-.27-.2-.57-.35z"
+          />
+        </svg>
+      </span>
+
+      <span class="whatsapp-text">Chatta med oss</span>
+    </a>
+  </div>
 </template>
 
 <style scoped>
@@ -420,4 +282,81 @@ export default {
   .left-90 {
     left: 10%;
   }
+
+  .whatsapp-container {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1050;
+}
+
+.whatsapp-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 18px;
+  border: 1px solid #42e47f;
+  border-radius: 999px;
+
+  background-color: #25d366;
+  color: #000;
+  text-decoration: none;
+  font-weight: 700;
+
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.35);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.whatsapp-button:hover {
+  color: #000;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 38px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  border-radius: 50%;
+
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.whatsapp-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 576px) {
+  .whatsapp-container {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .whatsapp-button {
+    width: 56px;
+    height: 56px;
+    padding: 13px;
+    justify-content: center;
+  }
+
+  .whatsapp-icon {
+    width: 30px;
+    height: 30px;
+    padding: 3px;
+    background: transparent;
+  }
+
+  .whatsapp-text {
+    display: none;
+  }
+}
+
 </style>

@@ -1,0 +1,14 @@
+<svg width="256" height="436" viewBox="0 0 256 436" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(0 0)">
+    <path d="M128 0C57.31 0 0 57.31 0 128C0 224 128 436 128 436C128 436 256 224 256 128C256 57.31 198.69 0 128 0Z" fill="url(#pinGradient)"/>
+    <circle cx="128" cy="128" r="73" fill="#B4203A"/>
+    <circle cx="128" cy="128" r="53" fill="#FFD500"/>
+    <circle cx="128" cy="128" r="32" fill="black"/>
+  </g>
+  <defs>
+    <linearGradient id="pinGradient" x1="0" y1="0" x2="256" y2="436" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4F69FF"/>
+      <stop offset="1" stop-color="#2A3AC5"/>
+    </linearGradient>
+  </defs>
+</svg>
