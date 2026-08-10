@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer bg-light text-dark pt-5 pb-3 mt-auto">
+  <footer class="footer text-dark pt-5 pb-3 mt-auto">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-6 d-flex flex-column mb-4">
@@ -36,6 +36,10 @@
 </template>
 
 <style scoped>
+.footer {
+  background-color: var(--on-footer-bg);
+}
+
 .footer-link {
   cursor: pointer;
   color: #6c757d;

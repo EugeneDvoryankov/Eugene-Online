@@ -19,21 +19,21 @@
       <div class="header-right">
         <div class="d-flex">
           <RouterLink
-            to="/" class="btn btn-link text-white">
+            to="/" class="header-link">
             Hem
           </RouterLink>
           <RouterLink
-            to="/about-us" class="btn btn-link text-white"
+            to="/about-us" class="header-link"
           >
             Om oss
           </RouterLink>
           <RouterLink
-            to="/products" class="btn btn-link text-white"
+            to="/products" class="header-link"
           >
             Våra tjänster
           </RouterLink>
           <RouterLink 
-            to="/contact" class="btn btn-link text-white"
+            to="/contact" class="header-link"
             >Kontakta oss
           </RouterLink>
         </div>
@@ -126,13 +126,17 @@ export default {
 
 .header {
   overflow: hidden;
-  background-color: #0d6efd;
+  background-color: var(--on-header-bg);
   padding: 20px 10px;
 }
 
+.header-link{
+  color: var(--on-header-link);
+}
+
+
 .header a {
   float: left;
-  color: black;
   text-align: center;
   padding: 12px;
   text-decoration: none;

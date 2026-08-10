@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue-next/dist/bootstrap-vue-next.css';
 // For Bootstrap Icons
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import './styles/themes.css';
 
 const app = createApp(App);
 
