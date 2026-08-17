@@ -9,6 +9,7 @@
   --on-header-link: #ffffff;
 
   --on-text: #111111;
+  --on-footer-text: #111111;
   --on-text-secondary: #666666;
 
   --on-border: #dddddd;
@@ -24,11 +25,12 @@
 [data-bs-theme='dark'] {
   --on-bg: #080b12;
   --on-surface: #111827;
-  --on-header-bg: #080b12;
+  --on-header-bg: #0f172a;
   --on-footer-bg: #0f172a;
 
   --on-text: #ffffff;
   --on-text-secondary: #a0a0a0;
+  --on-footer-text: #ffffff;
 
   --on-border: #30363d;
 
@@ -36,6 +38,16 @@
   --on-primary-text: #ffffff;
 
   --on-card-bg: #111827;
+}
+
+/* Light mode */
+[data-bs-theme='light'] .landing-page-drawing {
+  filter: none;
+}
+
+/* Dark mode */
+[data-bs-theme='dark'] .landing-page-drawing {
+  filter: invert(1);
 }
 
 

@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer text-dark pt-5 pb-3 mt-auto">
+  <footer class="footer pt-5 pb-3 mt-auto">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-6 d-flex flex-column mb-4">
@@ -42,7 +42,7 @@
 
 .footer-link {
   cursor: pointer;
-  color: #6c757d;
+  color: var(--on-footer-text);
   text-decoration: none;
   margin-bottom: 0.5rem;
   transition: 0.2s;

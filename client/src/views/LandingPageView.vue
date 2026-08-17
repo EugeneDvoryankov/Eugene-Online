@@ -28,7 +28,7 @@ export default {
         </div>
       </div>
       <div class="order-1 order-md-2 position-relative flex-1 d-flex justify-content-center align-items-center">
-        <LandingPageDrawing class="w-50" />
+        <LandingPageDrawing class="landing-page-drawing w-50" />
       </div>
     </BContainer>
 
@@ -178,6 +178,14 @@ export default {
   .no-shrink {
     flex-shrink: 0;
     min-width: 0;
+  }
+
+  .landing-page-drawing {
+    filter: none;
+  }
+
+  [data-bs-theme='dark'] .landing-page-drawing {
+    filter: invert(1);
   }
 
   .flex-1 {

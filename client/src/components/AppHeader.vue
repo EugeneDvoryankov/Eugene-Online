@@ -18,6 +18,18 @@
 
       <div class="header-right">
         <div class="d-flex">
+          <BButton
+            variant="link"
+            class="theme-toggle"
+            @click="toggleTheme"
+            :aria-label="mode === 'dark' ? 'Byt till ljust tema' : 'Byt till mörkt tema'"
+            :title="mode === 'dark' ? 'Byt till ljust tema' : 'Byt till mörkt tema'"
+          >
+            <i
+              class="bi"
+              :class="mode === 'dark' ? 'bi-moon-fill' : 'bi-sun-fill'"
+            ></i>
+          </BButton>
           <RouterLink
             to="/" class="header-link">
             Hem
@@ -52,7 +64,7 @@ import * as auth from '../services/auth';
 import type { User } from '@/types';
 import * as api from '../api';
 import BookingModal from './BookingModal.vue';
-import { BDropdown, BDropdownItem } from 'bootstrap-vue-next';
+import { BDropdown, BDropdownItem, useColorMode } from 'bootstrap-vue-next';
 
 /* const username = computed(() => {
   if (!email.value) return "";
@@ -99,7 +111,18 @@ export default {
   },
   setup() {
     const router = useRouter();
-    return { router };
+
+    const mode = useColorMode({
+      persist: true,
+      initialValue: 'dark',
+    });
+
+    function toggleTheme() {
+      mode.value = mode.value === 'dark' ? 'light' : 'dark'; 
+    }
+
+    return { router, mode, toggleTheme };
+    
   },
   async mounted() {
     // Fetch user when the component mounts and also when the login state changes
@@ -134,6 +157,18 @@ export default {
   color: var(--on-header-link);
 }
 
+.theme-toggle {
+  color: var(--on-header-link);
+  font-size: 1.4rem;
+  padding: 0.4rem 0.7rem;
+  border: none;
+  text-decoration: none;
+}
+
+.theme-toggle:hover {
+  color: var(--on-header-link);
+  background-color: rgba(255, 255, 255, 0.15);
+}
 
 .header a {
   float: left;
