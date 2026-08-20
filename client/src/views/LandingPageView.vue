@@ -10,12 +10,125 @@ export default {
     LandingPageDrawing,
     LandingPageTeamDrawing,
   },
+
+  methods: {
+    setPrimaryColor(color: string) {
+      document.documentElement.style.setProperty('--on-primary', color);
+    },
+
+    resetPrimaryColor() {
+      document.documentElement.style.removeProperty('--on-primary');
+
+    }
+  }
+
 };
 </script>
 
 <template>
   <!-- <h1>Landing Page</h1> -->
   <!-- Page container -->
+
+  <BContainer fluid tag="section" class="why-section py-5">
+    <div class="text-center mb-5">
+      <h2>Varför välja OnlineNow?</h2>
+      <p class="why-subtitle">
+        Vi bygger moderna digitala lösningar som är snabba, flexibla och enkla att vidareutveckla.
+      </p>
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="why-card">
+          <i class="bi bi-lightning-charge-fill why-icon"> Snabbt </i> 
+          <p>
+            Moderna tekniker och effektiv utveckling ger snabba webbplatser
+            och kortare väg från idé till färdig produkt.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="why-card">
+          <i class="bi bi-phone-fill why-icon"> Responsivt</i>
+          <p>
+            Lösningen skalar korrekt till alla enheter. Den fungerar på mobil, surfplatta och dator från första början.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="why-card">
+          <i class="bi bi-palette-fill why-icon"> Flexibelt</i>
+          <p>
+            Design, färger och funktioner kan anpassas efter företagets behov
+            och varumärke.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="why-card">
+          <i class="bi bi-code-slash why-icon"> Utbyggbart</i>
+          <p>
+            Vi bygger med återanvändbara komponenter så att lösningen kan växa
+            tillsammans med företaget.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </BContainer>
+
+  <BContainer fluid tag="section" class="design-demo py-5">
+    <div class="design-demo-card">
+      <div>
+        <span class="design-demo-label">INTERAKTIV DEMO</span>
+
+        <h2>Testa vår design själv</h2>
+
+        <p>
+          Välj en färg och se hur webbplatsens design kan anpassas
+          efter ditt företags varumärke.
+        </p>
+      </div>
+
+      <div class="color-options">
+        <button
+          class="color-button color-purple"
+          aria-label="Lila"
+          @click="setPrimaryColor('#8b5cf6')"
+        ></button>
+
+        <button
+          class="color-button color-blue"
+          aria-label="Blå"
+          @click="setPrimaryColor('#0d6efd')"
+        ></button>
+
+        <button
+          class="color-button color-green"
+          aria-label="Grön"
+          @click="setPrimaryColor('#20c997')"
+        ></button>
+
+        <button
+          class="color-button color-orange"
+          aria-label="Orange"
+          @click="setPrimaryColor('#fd7e14')"
+        ></button>
+
+        <button
+          class="reset-color-button"
+          @click="resetPrimaryColor"
+        >
+          Återställ
+        </button>
+      </div>
+    </div>
+  </BContainer>
+
   <BContainer fluid="md" class="py-5 overflow-x-hidden">
     <!-- Container with call-to-action and drawing -->
     <BContainer fluid tag="section" class="vh-70 d-flex flex-column flex-md-row">
@@ -82,6 +195,46 @@ export default {
 </template>
 
 <style scoped>
+  .why-section {
+    color: var(--on-text);
+  }
+
+  .why-subtitle {
+    color: var(--on-text-secondary);
+  }
+
+  .why-icon {
+    color: var(--on-primary);
+  }
+
+  .why-card {
+    height: 100%;
+
+    /* Space between card edge and content */
+    padding: 1.75rem;
+
+    background-color: var(--on-card-bg);
+    color: var(--on-text);
+
+    border: 1px solid var(--on-border);
+    border-radius: 1rem;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .why-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+
+    border-color: var(--on-primary);
+  }
+  
   .reference-company {
     display: flex;
     justify-content: center;
@@ -90,6 +243,108 @@ export default {
     flex-shrink: 0;
     padding: 0.4rem;
   }
+
+  .design-demo-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+
+  padding: 2.5rem;
+
+  background-color: var(--on-card-bg);
+  color: var(--on-text);
+
+  border: 1px solid var(--on-border);
+  border-radius: 1.25rem;
+}
+
+.design-demo-card p {
+  max-width: 650px;
+  margin-bottom: 0;
+
+  color: var(--on-text-secondary);
+}
+
+.design-demo-label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+
+  color: var(--on-primary);
+
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+}
+
+.color-options {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-shrink: 0;
+}
+
+.color-button {
+  width: 42px;
+  height: 42px;
+
+  border: 3px solid transparent;
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.color-button:hover {
+  transform: scale(1.15);
+  border-color: var(--on-text);
+}
+
+.color-purple {
+  background-color: #8b5cf6;
+}
+
+.color-blue {
+  background-color: #0d6efd;
+}
+
+.color-green {
+  background-color: #20c997;
+}
+
+.color-orange {
+  background-color: #fd7e14;
+}
+
+.reset-color-button {
+  padding: 0.6rem 1rem;
+
+  background: transparent;
+  color: var(--on-text);
+
+  border: 1px solid var(--on-border);
+  border-radius: 0.5rem;
+
+  cursor: pointer;
+}
+
+.reset-color-button:hover {
+  border-color: var(--on-primary);
+}
+
+@media (max-width: 768px) {
+  .design-demo-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .color-options {
+    flex-wrap: wrap;
+  }
+}
 
   /* Bootstrap md */
   @media (min-width: 768px) {
