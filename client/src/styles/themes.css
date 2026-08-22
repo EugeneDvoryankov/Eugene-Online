@@ -1,57 +1,349 @@
-/* LIGHT MODE #0d6efd; #f8f9fa */
-:root,
-[data-bs-theme='light'] {
-  --on-bg: #ffffff;
-  --on-surface: #f5f5f5;
-  --on-header-bg: #0d6efd;
-  --on-footer-bg: #f8f9fa;
+/* =========================================================
+   DEFAULT / DARK FALLBACK
+   ========================================================= */
 
+:root {
+  color-scheme: dark;
+
+  --on-bg: #080b12;
+  --on-surface: #111827;
+
+  --on-header-bg: #2e1065;
+  --on-header-text: #ffffff;
   --on-header-link: #ffffff;
 
+  --on-footer-bg: #1e102f;
+  --on-footer-text: #ffffff;
+
+  --on-text: #ffffff;
+  --on-text-secondary: #a0a0a0;
+
+  --on-border: #30363d;
+
+  --on-primary: #c084fc;
+  --on-primary-text: #ffffff;
+
+  --on-card-bg: #111827;
+}
+
+
+/* =========================================================
+   1. LIGHT / DARK BASE
+   ========================================================= */
+
+
+/* LIGHT */
+
+[data-bs-theme='light'] {
+  color-scheme: light;
+
+  --on-bg: #ffffff;
+  --on-surface: #f5f5f5;
+
+  --on-header-bg: #7c3aed;
+  --on-header-text: #ffffff;
+  --on-header-link: #ffffff;
+
+  --on-footer-bg: #f3e8ff;
+  --on-footer-text: #3b0764;
+
   --on-text: #111111;
-  --on-footer-text: #111111;
   --on-text-secondary: #666666;
 
   --on-border: #dddddd;
 
-  --on-primary: #6f42c1;
+  --on-primary: #7c3aed;
   --on-primary-text: #ffffff;
 
   --on-card-bg: #ffffff;
 }
 
 
-/* DARK MODE */
+/* DARK */
+
 [data-bs-theme='dark'] {
+  color-scheme: dark;
+
   --on-bg: #080b12;
   --on-surface: #111827;
-  --on-header-bg: #0f172a;
-  --on-footer-bg: #0f172a;
+
+  --on-header-bg: #2e1065;
+  --on-header-text: #ffffff;
+  --on-header-link: #ffffff;
+
+  --on-footer-bg: #1e102f;
+  --on-footer-text: #ffffff;
 
   --on-text: #ffffff;
   --on-text-secondary: #a0a0a0;
-  --on-footer-text: #ffffff;
 
   --on-border: #30363d;
 
-  --on-primary: #8b5cf6;
+  --on-primary: #c084fc;
   --on-primary-text: #ffffff;
 
   --on-card-bg: #111827;
 }
 
-/* Light mode */
+
+/* =========================================================
+   LANDING PAGE DRAWING
+   ========================================================= */
+
 [data-bs-theme='light'] .landing-page-drawing {
   filter: none;
 }
 
-/* Dark mode */
 [data-bs-theme='dark'] .landing-page-drawing {
   filter: invert(1);
 }
 
 
-/* GLOBAL WEBSITE COLORS */
+/* =========================================================
+   2. BRAND BASE
+
+   These mainly exist so that --on-primary has a sensible
+   value even when another component wants to use the brand.
+   The 8 combinations below can override them.
+   ========================================================= */
+
+[data-brand='purple'] {
+  --on-primary: #8b5cf6;
+}
+
+[data-brand='blue'] {
+  --on-primary: #2563eb;
+}
+
+[data-brand='green'] {
+  --on-primary: #059669;
+}
+
+[data-brand='orange'] {
+  --on-primary: #ea580c;
+}
+
+
+/* =========================================================
+   3. LIGHT + PURPLE
+   ========================================================= */
+
+[data-bs-theme='light'][data-brand='purple'] {
+  --on-bg: #ffffff;
+  --on-surface: #faf7ff;
+
+  --on-header-bg: #7c3aed;
+  --on-header-text: #ffffff;
+  --on-header-link: #ffffff;
+
+  --on-footer-bg: #f3e8ff;
+  --on-footer-text: #3b0764;
+
+  --on-text: #1f1235;
+  --on-text-secondary: #6b5a7d;
+
+  --on-border: #ddd6fe;
+
+  --on-primary: #7c3aed;
+  --on-primary-text: #ffffff;
+
+  --on-card-bg: #ffffff;
+}
+
+
+/* =========================================================
+   4. DARK + PURPLE
+   ========================================================= */
+
+[data-bs-theme='dark'][data-brand='purple'] {
+  --on-bg: #0d0714;
+  --on-surface: #171020;
+
+  --on-header-bg: #2e1065;
+  --on-header-text: #ffffff;
+  --on-header-link: #ffffff;
+
+  --on-footer-bg: #1e102f;
+  --on-footer-text: #f5e9ff;
+
+  --on-text: #ffffff;
+  --on-text-secondary: #c4b5d4;
+
+  --on-border: #4c1d6f;
+
+  --on-primary: #c084fc;
+  --on-primary-text: #190625;
+
+  --on-card-bg: #171020;
+}
+
+
+/* =========================================================
+   5. LIGHT + BLUE
+   ========================================================= */
+
+[data-bs-theme='light'][data-brand='blue'] {
+  --on-bg: #ffffff;
+  --on-surface: #f4f8ff;
+
+  --on-header-bg: #2563eb;
+  --on-header-text: #ffffff;
+  --on-header-link: #ffffff;
+
+  --on-footer-bg: #eff6ff;
+  --on-footer-text: #1e3a8a;
+
+  --on-text: #111827;
+  --on-text-secondary: #52627a;
+
+  --on-border: #bfdbfe;
+
+  --on-primary: #2563eb;
+  --on-primary-text: #ffffff;
+
+  --on-card-bg: #ffffff;
+}
+
+
+/* =========================================================
+   6. DARK + BLUE
+   ========================================================= */
+
+[data-bs-theme='dark'][data-brand='blue'] {
+  --on-bg: #06111f;
+  --on-surface: #0b1b30;
+
+  --on-header-bg: #0b2545;
+  --on-header-text: #eaf4ff;
+  --on-header-link: #eaf4ff;
+
+  --on-footer-bg: #071426;
+  --on-footer-text: #dbeafe;
+
+  --on-text: #f8fbff;
+  --on-text-secondary: #9fb6d0;
+
+  --on-border: #1e4b78;
+
+  --on-primary: #60a5fa;
+  --on-primary-text: #06111f;
+
+  --on-card-bg: #0b1b30;
+}
+
+
+/* =========================================================
+   7. LIGHT + GREEN
+   ========================================================= */
+
+[data-bs-theme='light'][data-brand='green'] {
+  --on-bg: #ffffff;
+  --on-surface: #f3fbf7;
+
+  --on-header-bg: #059669;
+  --on-header-text: #ffffff;
+  --on-header-link: #ffffff;
+
+  --on-footer-bg: #ecfdf5;
+  --on-footer-text: #064e3b;
+
+  --on-text: #10251d;
+  --on-text-secondary: #537066;
+
+  --on-border: #a7f3d0;
+
+  --on-primary: #059669;
+  --on-primary-text: #ffffff;
+
+  --on-card-bg: #ffffff;
+}
+
+
+/* =========================================================
+   8. DARK + GREEN
+   ========================================================= */
+
+[data-bs-theme='dark'][data-brand='green'] {
+  --on-bg: #061411;
+  --on-surface: #0b211c;
+
+  --on-header-bg: #064e3b;
+  --on-header-text: #ecfdf5;
+  --on-header-link: #ecfdf5;
+
+  --on-footer-bg: #041f19;
+  --on-footer-text: #d1fae5;
+
+  --on-text: #f0fdf4;
+  --on-text-secondary: #9dcabb;
+
+  --on-border: #16654e;
+
+  --on-primary: #34d399;
+  --on-primary-text: #031a13;
+
+  --on-card-bg: #0b211c;
+}
+
+
+/* =========================================================
+   9. LIGHT + ORANGE
+   ========================================================= */
+
+[data-bs-theme='light'][data-brand='orange'] {
+  --on-bg: #ffffff;
+  --on-surface: #fffaf5;
+
+  --on-header-bg: #ea580c;
+  --on-header-text: #ffffff;
+  --on-header-link: #ffffff;
+
+  --on-footer-bg: #fff7ed;
+  --on-footer-text: #7c2d12;
+
+  --on-text: #2b170d;
+  --on-text-secondary: #795c4c;
+
+  --on-border: #fed7aa;
+
+  --on-primary: #ea580c;
+  --on-primary-text: #ffffff;
+
+  --on-card-bg: #ffffff;
+}
+
+
+/* =========================================================
+   10. DARK + ORANGE
+   ========================================================= */
+
+[data-bs-theme='dark'][data-brand='orange'] {
+  --on-bg: #170b05;
+  --on-surface: #251209;
+
+  --on-header-bg: #431407;
+  --on-header-text: #fff7ed;
+  --on-header-link: #fff7ed;
+
+  --on-footer-bg: #2a1006;
+  --on-footer-text: #ffedd5;
+
+  --on-text: #fffaf5;
+  --on-text-secondary: #d8ae92;
+
+  --on-border: #7c2d12;
+
+  --on-primary: #fb923c;
+  --on-primary-text: #241006;
+
+  --on-card-bg: #251209;
+}
+
+
+/* =========================================================
+   GLOBAL WEBSITE COLORS
+   ========================================================= */
+
 html,
 body,
 #app {
@@ -59,6 +351,12 @@ body,
 }
 
 body {
+  margin: 0;
+
   background-color: var(--on-bg);
   color: var(--on-text);
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }

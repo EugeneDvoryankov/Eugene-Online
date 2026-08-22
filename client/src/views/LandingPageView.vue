@@ -12,36 +12,37 @@ export default {
   },
 
   methods: {
-    setPrimaryColor(color: string) {
-      document.documentElement.style.setProperty('--on-primary', color);
+    setBrandColor(brand: string) {
+      document.documentElement.dataset.brand = brand;
     },
 
-    resetPrimaryColor() {
-      document.documentElement.style.removeProperty('--on-primary');
-
-    }
-  }
-
+    resetBrandColor() {
+      delete document.documentElement.dataset.brand;
+    },
+  },
 };
 </script>
 
 <template>
-  <!-- <h1>Landing Page</h1> -->
-  <!-- Page container -->
-
+  <!-- WHY ONLINE NOW -->
   <BContainer fluid tag="section" class="why-section py-5">
     <div class="text-center mb-5">
       <h2>Varför välja OnlineNow?</h2>
+
       <p class="why-subtitle">
-        Vi bygger moderna digitala lösningar som är snabba, flexibla och enkla att vidareutveckla.
+        Vi bygger moderna digitala lösningar som är snabba, flexibla och enkla
+        att vidareutveckla.
       </p>
     </div>
 
     <div class="row g-4">
-
+      <!-- Snabbt -->
       <div class="col-12 col-md-6 col-lg-3">
         <div class="why-card">
-          <i class="bi bi-lightning-charge-fill why-icon"> Snabbt </i> 
+          <i class="bi bi-lightning-charge-fill why-icon">
+            Snabbt
+          </i>
+
           <p>
             Moderna tekniker och effektiv utveckling ger snabba webbplatser
             och kortare väg från idé till färdig produkt.
@@ -49,18 +50,27 @@ export default {
         </div>
       </div>
 
+      <!-- Responsivt -->
       <div class="col-12 col-md-6 col-lg-3">
         <div class="why-card">
-          <i class="bi bi-phone-fill why-icon"> Responsivt</i>
+          <i class="bi bi-phone-fill why-icon">
+            Responsivt
+          </i>
+
           <p>
-            Lösningen skalar korrekt till alla enheter. Den fungerar på mobil, surfplatta och dator från första början.
+            Lösningen skalar korrekt till alla enheter. Den fungerar på mobil,
+            surfplatta och dator från första början.
           </p>
         </div>
       </div>
 
+      <!-- Flexibelt -->
       <div class="col-12 col-md-6 col-lg-3">
         <div class="why-card">
-          <i class="bi bi-palette-fill why-icon"> Flexibelt</i>
+          <i class="bi bi-palette-fill why-icon">
+            Flexibelt
+          </i>
+
           <p>
             Design, färger och funktioner kan anpassas efter företagets behov
             och varumärke.
@@ -68,23 +78,29 @@ export default {
         </div>
       </div>
 
+      <!-- Utbyggbart -->
       <div class="col-12 col-md-6 col-lg-3">
         <div class="why-card">
-          <i class="bi bi-code-slash why-icon"> Utbyggbart</i>
+          <i class="bi bi-code-slash why-icon">
+            Utbyggbart
+          </i>
+
           <p>
             Vi bygger med återanvändbara komponenter så att lösningen kan växa
             tillsammans med företaget.
           </p>
         </div>
       </div>
-
     </div>
   </BContainer>
 
+  <!-- INTERACTIVE DESIGN DEMO -->
   <BContainer fluid tag="section" class="design-demo py-5">
     <div class="design-demo-card">
       <div>
-        <span class="design-demo-label">INTERAKTIV DEMO</span>
+        <span class="design-demo-label">
+          INTERAKTIV DEMO
+        </span>
 
         <h2>Testa vår design själv</h2>
 
@@ -98,30 +114,30 @@ export default {
         <button
           class="color-button color-purple"
           aria-label="Lila"
-          @click="setPrimaryColor('#8b5cf6')"
+          @click="setBrandColor('purple')"
         ></button>
 
         <button
           class="color-button color-blue"
           aria-label="Blå"
-          @click="setPrimaryColor('#0d6efd')"
+          @click="setBrandColor('blue')"
         ></button>
 
         <button
           class="color-button color-green"
           aria-label="Grön"
-          @click="setPrimaryColor('#20c997')"
+          @click="setBrandColor('green')"
         ></button>
 
         <button
           class="color-button color-orange"
           aria-label="Orange"
-          @click="setPrimaryColor('#fd7e14')"
+          @click="setBrandColor('orange')"
         ></button>
 
         <button
           class="reset-color-button"
-          @click="resetPrimaryColor"
+          @click="resetBrandColor"
         >
           Återställ
         </button>
@@ -129,38 +145,144 @@ export default {
     </div>
   </BContainer>
 
+  <!-- MAIN LANDING PAGE -->
   <BContainer fluid="md" class="py-5 overflow-x-hidden">
-    <!-- Container with call-to-action and drawing -->
-    <BContainer fluid tag="section" class="vh-70 d-flex flex-column flex-md-row">
-      <div class="order-2 order-md-1 flex-1 d-flex flex-column justify-content-center gap-3">
-        <h1>Vi löser det <span class="fst-italic">tråkiga</span> tekniska</h1>
-        <h3 class="fs-4 text-secondary">Sveriges mest unika konsultbolag specialiserad inom allting IT vill jobba med dig, liten som stor</h3>
+
+    <!-- HERO -->
+    <BContainer
+      fluid
+      tag="section"
+      class="vh-70 d-flex flex-column flex-md-row"
+    >
+      <div
+        class="
+          order-2
+          order-md-1
+          flex-1
+          d-flex
+          flex-column
+          justify-content-center
+          gap-3
+        "
+      >
+        <h1>
+          Vi löser det
+          <span class="fst-italic">
+            tråkiga
+          </span>
+          tekniska
+        </h1>
+
+        <h3 class="hero-subtitle fs-4">
+          Sveriges mest unika konsultbolag specialiserad inom allting IT
+          vill jobba med dig, liten som stor
+        </h3>
+
         <div class="d-flex flex-row gap-3 mt-4">
-          <BButton variant="light" size="lg" to="/products">Våra tjänster</BButton>
-          <BButton variant="primary" size="lg" to="/register">Registrera dig</BButton>
+          <BButton
+            variant="light"
+            size="lg"
+            to="/products"
+          >
+            Våra tjänster
+          </BButton>
+
+          <!-- Theme-aware button -->
+          <BButton
+            class="theme-primary-button"
+            size="lg"
+            to="/register"
+          >
+            Registrera dig
+          </BButton>
         </div>
       </div>
-      <div class="order-1 order-md-2 position-relative flex-1 d-flex justify-content-center align-items-center">
-        <LandingPageDrawing class="landing-page-drawing w-50" />
+
+      <div
+        class="
+          order-1
+          order-md-2
+          position-relative
+          flex-1
+          d-flex
+          justify-content-center
+          align-items-center
+        "
+      >
+        <LandingPageDrawing
+          class="landing-page-drawing w-50"
+        />
       </div>
     </BContainer>
 
-  
-
-
+    <!-- CTA CARDS -->
     <BContainer fluid tag="section">
       <div class="w-100 d-flex flex-column flex-md-row gap-4">
-        <div class="flex-basis-50 d-flex flex-column justify-content-end gap-2 px-5 py-4 bg-primary rounded-4 text-white">
-          <h3>Kom igång. <span class="separate-line">Börja med ett företagskonto.</span></h3>
-          <BButton variant="outline-primary" class="text-light border-light max-w-50" to="/register">Skapa konto</BButton>
+
+        <!-- CREATE ACCOUNT -->
+        <div
+          class="
+            theme-primary-card
+            flex-basis-50
+            d-flex
+            flex-column
+            justify-content-end
+            gap-2
+            px-5
+            py-4
+            rounded-4
+          "
+        >
+          <h3>
+            Kom igång.
+
+            <span class="separate-line">
+              Börja med ett företagskonto.
+            </span>
+          </h3>
+
+          <BButton
+            class="theme-outline-button max-w-50"
+            to="/register"
+          >
+            Skapa konto
+          </BButton>
         </div>
-        <!-- Avatars from https://notion-avatar.app/ -->
-        <div class="flex-basis-50 d-flex flex-column gap-2 px-4 py-4 bg-primary rounded-4 text-white">
-          <div class="w-100 d-flex justify-content-center align-items-center bg-white rounded-4">
+
+        <!-- MEET THE TEAM -->
+        <div
+          class="
+            theme-primary-card
+            flex-basis-50
+            d-flex
+            flex-column
+            gap-2
+            px-4
+            py-4
+            rounded-4
+          "
+        >
+          <div
+            class="
+              team-drawing-container
+              w-100
+              d-flex
+              justify-content-center
+              align-items-center
+              rounded-4
+            "
+          >
             <LandingPageTeamDrawing style="height: 120px" />
           </div>
-          <RouterLink to="/about-us" class="d-flex align-items-center gap-2 text-white">
-            <h3>Möt teamet</h3>
+
+          <RouterLink
+            to="/about-us"
+            class="team-link d-flex align-items-center gap-2"
+          >
+            <h3 class="mb-0">
+              Möt teamet
+            </h3>
+
             <i class="bi bi-arrow-up-right"></i>
           </RouterLink>
         </div>
@@ -168,7 +290,7 @@ export default {
     </BContainer>
   </BContainer>
 
-  <!-- WhatsApp chat button -->
+  <!-- WHATSAPP -->
   <div class="whatsapp-container">
     <a
       href="https://wa.me/46736871302?text=Hej!%20Jag%20vill%20chatta%20med%20OnlineNow%20AB"
@@ -189,67 +311,67 @@ export default {
         </svg>
       </span>
 
-      <span class="whatsapp-text">Chatta med oss</span>
+      <span class="whatsapp-text">
+        Chatta med oss
+      </span>
     </a>
   </div>
 </template>
 
 <style scoped>
-  .why-section {
-    color: var(--on-text);
-  }
+/* =========================================================
+   WHY ONLINE NOW
+   ========================================================= */
 
-  .why-subtitle {
-    color: var(--on-text-secondary);
-  }
+.why-section {
+  color: var(--on-text);
+}
 
-  .why-icon {
-    color: var(--on-primary);
-  }
+.why-subtitle {
+  color: var(--on-text-secondary);
+}
 
-  .why-card {
-    height: 100%;
+.why-icon {
+  color: var(--on-primary);
+}
 
-    /* Space between card edge and content */
-    padding: 1.75rem;
+.why-card {
+  height: 100%;
+  padding: 1.75rem;
 
-    background-color: var(--on-card-bg);
-    color: var(--on-text);
+  background-color: var(--on-card-bg);
+  color: var(--on-text);
 
-    border: 1px solid var(--on-border);
-    border-radius: 1rem;
+  border: 1px solid var(--on-border);
+  border-radius: 1rem;
 
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 
-    transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease,
-      border-color 0.25s ease;
-  }
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
 
-  .why-card:hover {
-    transform: translateY(-6px);
+.why-card:hover {
+  transform: translateY(-6px);
 
-    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
 
-    border-color: var(--on-primary);
-  }
-  
-  .reference-company {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-basis: 20%;
-    flex-shrink: 0;
-    padding: 0.4rem;
-  }
+  border-color: var(--on-primary);
+}
 
-  .design-demo-card {
+
+/* =========================================================
+   INTERACTIVE DESIGN DEMO
+   ========================================================= */
+
+.design-demo-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 3rem;
 
+  gap: 3rem;
   padding: 2.5rem;
 
   background-color: var(--on-card-bg);
@@ -268,6 +390,7 @@ export default {
 
 .design-demo-label {
   display: inline-block;
+
   margin-bottom: 0.5rem;
 
   color: var(--on-primary);
@@ -280,7 +403,9 @@ export default {
 .color-options {
   display: flex;
   align-items: center;
+
   gap: 0.8rem;
+
   flex-shrink: 0;
 }
 
@@ -300,6 +425,7 @@ export default {
 
 .color-button:hover {
   transform: scale(1.15);
+
   border-color: var(--on-text);
 }
 
@@ -335,6 +461,356 @@ export default {
   border-color: var(--on-primary);
 }
 
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero-subtitle {
+  color: var(--on-text-secondary);
+}
+
+
+/* =========================================================
+   THEME-AWARE BUTTONS / CTA
+   ========================================================= */
+
+.theme-primary-button {
+  background-color: var(--on-primary);
+  color: var(--on-primary-text);
+
+  border-color: var(--on-primary);
+}
+
+.theme-primary-button:hover,
+.theme-primary-button:focus,
+.theme-primary-button:active {
+  background-color: var(--on-primary) !important;
+  color: var(--on-primary-text) !important;
+
+  border-color: var(--on-primary) !important;
+
+  opacity: 0.85;
+}
+
+
+/* Colored CTA cards */
+.theme-primary-card {
+  background-color: var(--on-primary);
+  color: var(--on-primary-text);
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+
+/* Button inside colored CTA card */
+.theme-outline-button {
+  background-color: transparent;
+  color: var(--on-primary-text);
+
+  border: 1px solid var(--on-primary-text);
+}
+
+.theme-outline-button:hover,
+.theme-outline-button:focus,
+.theme-outline-button:active {
+  background-color: var(--on-primary-text) !important;
+  color: var(--on-primary) !important;
+
+  border-color: var(--on-primary-text) !important;
+}
+
+
+/* =========================================================
+   TEAM
+   ========================================================= */
+
+.team-drawing-container {
+  background-color: var(--on-card-bg);
+
+  transition: background-color 0.25s ease;
+}
+
+.team-link {
+  color: var(--on-primary-text);
+
+  text-decoration: none;
+}
+
+.team-link:hover {
+  color: var(--on-primary-text);
+
+  opacity: 0.8;
+}
+
+
+/* =========================================================
+   GENERAL LAYOUT
+   ========================================================= */
+
+.vh-70 {
+  height: 70vh;
+}
+
+.vh-80 {
+  height: 80vh;
+}
+
+.flex-1 {
+  flex: 1;
+
+  min-width: 0;
+  min-height: 0;
+}
+
+.flex-basis-40 {
+  flex-basis: 40%;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.flex-basis-50 {
+  flex-basis: 50%;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.flex-basis-60 {
+  flex-basis: 60%;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.flex-basis-100 {
+  flex-basis: 100%;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.no-shrink {
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.separate-line {
+  display: block;
+}
+
+
+/* =========================================================
+   LEGACY / REFERENCE STYLES
+   ========================================================= */
+
+.reference-company {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-basis: 20%;
+  flex-shrink: 0;
+
+  padding: 0.4rem;
+}
+
+.reference-company-row {
+  animation: slideLeft 24s linear infinite;
+}
+
+.reference-company-row-replacement {
+  animation: slideLeftReplacement 24s linear infinite;
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translate(0%, 0%);
+  }
+
+  to {
+    transform: translate(-200%, 0%);
+  }
+}
+
+@keyframes slideLeftReplacement {
+  from {
+    transform: translate(100%, 0%);
+  }
+
+  to {
+    transform: translate(-100%, 0%);
+  }
+}
+
+.employee-columns {
+  position: absolute;
+
+  top: -25%;
+  left: 0;
+  bottom: 0;
+  right: 5%;
+}
+
+.employee-card {
+  padding: 0.25rem 1.5rem;
+
+  background-color: var(--on-card-bg);
+  color: var(--on-text);
+
+  margin-top: 0.75rem;
+
+  box-shadow: 0 8px 16px rgba(66, 68, 90, 0.5);
+}
+
+.employee-card-1 {
+  top: -30%;
+  left: 0;
+}
+
+.card-shadow {
+  box-shadow: 0 8px 16px rgba(66, 68, 90, 0.5);
+}
+
+
+/* =========================================================
+   POSITION HELPERS
+   ========================================================= */
+
+.top-10 {
+  top: 10%;
+}
+
+.top-20 {
+  top: 20%;
+}
+
+.top-30 {
+  top: 30%;
+}
+
+.top-40 {
+  top: 40%;
+}
+
+.top-60 {
+  top: 60%;
+}
+
+.top-70 {
+  top: 70%;
+}
+
+.top-80 {
+  top: 80%;
+}
+
+.top-90 {
+  top: 90%;
+}
+
+.left-10 {
+  left: 10%;
+}
+
+.left-20 {
+  left: 20%;
+}
+
+.left-30 {
+  left: 30%;
+}
+
+.left-40 {
+  left: 40%;
+}
+
+.left-60 {
+  left: 60%;
+}
+
+.left-70 {
+  left: 70%;
+}
+
+.left-80 {
+  left: 80%;
+}
+
+.left-90 {
+  left: 90%;
+}
+
+
+/* =========================================================
+   WHATSAPP
+   ========================================================= */
+
+.whatsapp-container {
+  position: fixed;
+
+  right: 24px;
+  bottom: 24px;
+
+  z-index: 1050;
+}
+
+.whatsapp-button {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 12px 18px;
+
+  border: 1px solid #42e47f;
+  border-radius: 999px;
+
+  background-color: #25d366;
+  color: #000000;
+
+  text-decoration: none;
+  font-weight: 700;
+
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.35);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.whatsapp-button:hover {
+  color: #000000;
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 16px 38px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  padding: 6px;
+
+  border-radius: 50%;
+
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.whatsapp-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
 @media (max-width: 768px) {
   .design-demo-card {
     flex-direction: column;
@@ -346,255 +822,16 @@ export default {
   }
 }
 
-  /* Bootstrap md */
-  @media (min-width: 768px) {
-    .reference-company {
-      padding: 1rem;
-    }
+@media (min-width: 768px) {
+  .reference-company {
+    padding: 1rem;
   }
-
-  /* Bootstrap lg */
-  @media (min-width: 992px) {
-    .reference-company {
-      padding: 2rem;
-    }
-  }
-
-  .reference-company-row {
-    animation: slideLeft 24s linear infinite;
-  }
-
-  .reference-company-row-replacement {
-    animation: slideLeftReplacement 24s linear infinite;
-  }
-
-  @keyframes slideLeft {
-    from {
-      transform: translate(0%, 0%);
-    }
-    to {
-      transform: translate(-200%, 0%);
-    }
-  }
-
-  /* When the row has animated all the way to the left */
-  /* the container will be empty so you have to animate in a copy */
-  /* So that when the next animation iteration starts you start from */
-  /* the first five logos you started with the first time */
-  @keyframes slideLeftReplacement {
-    from {
-      transform: translate(100%, 0%);
-    }
-    to {
-      transform: translate(-100%, 0%);
-    }
-  }
-
-  .employee-columns {
-    position: absolute;
-    top: -25%;
-    left: 0;
-    bottom: 0;
-    right: 5%;
-  }
-
-  .employee-card {
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    background-color: white;
-    color: black;
-    margin-top: 0.75rem;
-    -webkit-box-shadow: 0px 8px 16px 0px rgba(66, 68, 90, 0.5);
-    -moz-box-shadow: 0px 8px 16px 0px rgba(66, 68, 90, 0.5);
-    box-shadow: 0px 8px 16px 0px rgba(66, 68, 90, 0.5);
-  }
-
-  .employee-card-1 {
-    top: -30%;
-    left: 0;
-  }
-
-  .card-shadow {
-    -webkit-box-shadow: 0px 8px 16px 0px rgba(66, 68, 90, 0.5);
-    -moz-box-shadow: 0px 8px 16px 0px rgba(66, 68, 90, 0.5);
-    box-shadow: 0px 8px 16px 0px rgba(66, 68, 90, 0.5);
-  }
-
-  .vh-70 {
-    height: 70vh;
-  }
-
-  .vh-80 {
-    height: 80vh;
-  }
-
-  .no-shrink {
-    flex-shrink: 0;
-    min-width: 0;
-  }
-
-  .landing-page-drawing {
-    filter: none;
-  }
-
-  [data-bs-theme='dark'] .landing-page-drawing {
-    filter: invert(1);
-  }
-
-  .flex-1 {
-    flex: 1;
-    /* Flex shrink below content size */
-    min-width: 0;
-    min-height: 0;
-  }
-
-  .flex-basis-40 {
-    flex-basis: 40%;
-    flex-shrink: 0;
-    flex-grow: 0;
-  }
-
-  .flex-basis-50 {
-    flex-basis: 50%;
-    flex-shrink: 0;
-    flex-grow: 0;
-  }
-
-  .flex-basis-60 {
-    flex-basis: 60%;
-    flex-shrink: 0;
-    flex-grow: 0;
-  }
-
-  .flex-basis-100 {
-    flex-basis: 100%;
-    flex-shrink: 0;
-    flex-grow: 0;
-  }
-
-  .separate-line {
-    display: block;
-  }
-
-  .off-primary {
-    color: #000000;
-  }
-
-  .top-10 {
-    top: 10%;
-  }
-
-  .top-20 {
-    top: 20%;
-  }
-
-  .top-30 {
-    top: 30%;
-  }
-
-  .top-40 {
-    top: 40%;
-  }
-
-  .top-60 {
-    top: 60%;
-  }
-
-  .top-70 {
-    top: 70%;
-  }
-
-  .top-80 {
-    top: 80%;
-  }
-
-  .top-90 {
-    top: 90%;
-  }
-
-  .left-10 {
-    left: 10%;
-  }
-
-  .left-20 {
-    left: 20%;
-  }
-
-  .left-30 {
-    left: 30%;
-  }
-
-  .left-40 {
-    left: 40%;
-  }
-
-  .left-60 {
-    left: 60%;
-  }
-
-  .left-70 {
-    left: 70%;
-  }
-
-  .left-80 {
-    left: 80%;
-  }
-
-  .left-90 {
-    left: 10%;
-  }
-
-  .whatsapp-container {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  z-index: 1050;
 }
 
-.whatsapp-button {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 12px 18px;
-  border: 1px solid #42e47f;
-  border-radius: 999px;
-
-  background-color: #25d366;
-  color: #000;
-  text-decoration: none;
-  font-weight: 700;
-
-  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.35);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.whatsapp-button:hover {
-  color: #000;
-  transform: translateY(-3px);
-  box-shadow: 0 16px 38px rgba(37, 211, 102, 0.5);
-}
-
-.whatsapp-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 30px;
-  height: 30px;
-  padding: 6px;
-  border-radius: 50%;
-
-  background-color: rgba(0, 0, 0, 0.12);
-}
-
-.whatsapp-icon svg {
-  width: 100%;
-  height: 100%;
+@media (min-width: 992px) {
+  .reference-company {
+    padding: 2rem;
+  }
 }
 
 @media (max-width: 576px) {
@@ -606,14 +843,18 @@ export default {
   .whatsapp-button {
     width: 56px;
     height: 56px;
+
     padding: 13px;
+
     justify-content: center;
   }
 
   .whatsapp-icon {
     width: 30px;
     height: 30px;
+
     padding: 3px;
+
     background: transparent;
   }
 
@@ -621,5 +862,4 @@ export default {
     display: none;
   }
 }
-
 </style>
