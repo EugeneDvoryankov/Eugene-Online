@@ -1,93 +1,150 @@
 /* =========================================================
-   DEFAULT / DARK FALLBACK
+   ONLINENOW GLOBAL THEME SYSTEM
+
+   Default:
+   Dark + Black & Red
+
+   Available brand themes:
+   - black-red
+   - purple
+   - blue
+   - green
+   - orange
+
+   Each brand can be combined with:
+   - light
+   - dark
+   ========================================================= */
+
+
+/* =========================================================
+   0. DEFAULT FALLBACK
+   DARK + BLACK & RED
    ========================================================= */
 
 :root {
   color-scheme: dark;
 
-  --on-bg: #080b12;
-  --on-surface: #111827;
+  /* Main surfaces */
+  --on-bg: #000000;
+  --on-surface: #111111;
+  --on-card-bg: #111111;
 
-  --on-header-bg: #2e1065;
+  /* Header */
+  --on-header-bg: #000000;
   --on-header-text: #ffffff;
   --on-header-link: #ffffff;
 
-  --on-footer-bg: #1e102f;
+  /* Footer */
+  --on-footer-bg: #000000;
   --on-footer-text: #ffffff;
 
+  /* Text */
   --on-text: #ffffff;
-  --on-text-secondary: #a0a0a0;
+  --on-text-secondary: #c5c5c5;
 
-  --on-border: #30363d;
+  /* Borders */
+  --on-border: #333333;
 
-  --on-primary: #c084fc;
+  /* Primary / accent */
+  --on-primary: #e7000b;
   --on-primary-text: #ffffff;
 
-  --on-card-bg: #111827;
+  /* Interactive demo previews */
+  --demo-purple: #2e1065;
+  --demo-blue: #0b2545;
+  --demo-green: #064e3b;
+  --demo-orange: #431407;
+  --demo-black-red: #e7000b;
 }
 
 
 /* =========================================================
-   1. LIGHT / DARK BASE
+   1. LIGHT MODE BASE
+   DEFAULT BRAND = BLACK & RED
    ========================================================= */
-
-
-/* LIGHT */
 
 [data-bs-theme='light'] {
   color-scheme: light;
 
+  /* Main surfaces */
   --on-bg: #ffffff;
-  --on-surface: #f5f5f5;
-
-  --on-header-bg: #7c3aed;
-  --on-header-text: #ffffff;
-  --on-header-link: #ffffff;
-
-  --on-footer-bg: #f3e8ff;
-  --on-footer-text: #3b0764;
-
-  --on-text: #111111;
-  --on-text-secondary: #666666;
-
-  --on-border: #dddddd;
-
-  --on-primary: #7c3aed;
-  --on-primary-text: #ffffff;
-
+  --on-surface: #f8f8f8;
   --on-card-bg: #ffffff;
-}
 
-
-/* DARK */
-
-[data-bs-theme='dark'] {
-  color-scheme: dark;
-
-  --on-bg: #080b12;
-  --on-surface: #111827;
-
-  --on-header-bg: #2e1065;
+  /* Header */
+  --on-header-bg: #000000;
   --on-header-text: #ffffff;
   --on-header-link: #ffffff;
 
-  --on-footer-bg: #1e102f;
+  /* Footer */
+  --on-footer-bg: #000000;
   --on-footer-text: #ffffff;
 
-  --on-text: #ffffff;
-  --on-text-secondary: #a0a0a0;
+  /* Text */
+  --on-text: #111111;
+  --on-text-secondary: #4b5563;
 
-  --on-border: #30363d;
+  /* Borders */
+  --on-border: #dddddd;
 
-  --on-primary: #c084fc;
+  /* Primary */
+  --on-primary: #e7000b;
   --on-primary-text: #ffffff;
 
-  --on-card-bg: #111827;
+  /* Interactive demo previews */
+  --demo-purple: #7c3aed;
+  --demo-blue: #2563eb;
+  --demo-green: #059669;
+  --demo-orange: #ea580c;
+  --demo-black-red: #e7000b;
 }
 
 
 /* =========================================================
-   LANDING PAGE DRAWING
+   2. DARK MODE BASE
+   DEFAULT BRAND = BLACK & RED
+   ========================================================= */
+
+[data-bs-theme='dark'] {
+  color-scheme: dark;
+
+  /* Main surfaces */
+  --on-bg: #000000;
+  --on-surface: #111111;
+  --on-card-bg: #111111;
+
+  /* Header */
+  --on-header-bg: #000000;
+  --on-header-text: #ffffff;
+  --on-header-link: #ffffff;
+
+  /* Footer */
+  --on-footer-bg: #000000;
+  --on-footer-text: #ffffff;
+
+  /* Text */
+  --on-text: #ffffff;
+  --on-text-secondary: #c5c5c5;
+
+  /* Borders */
+  --on-border: #333333;
+
+  /* Primary */
+  --on-primary: #e7000b;
+  --on-primary-text: #ffffff;
+
+  /* Interactive demo previews */
+  --demo-purple: #2e1065;
+  --demo-blue: #0b2545;
+  --demo-green: #064e3b;
+  --demo-orange: #431407;
+  --demo-black-red: #e7000b;
+}
+
+
+/* =========================================================
+   3. LANDING PAGE DRAWING
    ========================================================= */
 
 [data-bs-theme='light'] .landing-page-drawing {
@@ -100,12 +157,15 @@
 
 
 /* =========================================================
-   2. BRAND BASE
+   4. BRAND BASE COLORS
 
-   These mainly exist so that --on-primary has a sensible
-   value even when another component wants to use the brand.
-   The 8 combinations below can override them.
+   These are fallback accent colors when data-brand exists.
+   The detailed Light/Dark combinations below override them.
    ========================================================= */
+
+[data-brand='black-red'] {
+  --on-primary: #e7000b;
+}
 
 [data-brand='purple'] {
   --on-primary: #8b5cf6;
@@ -125,12 +185,65 @@
 
 
 /* =========================================================
-   3. LIGHT + PURPLE
+   5. LIGHT + BLACK & RED
+   ========================================================= */
+
+[data-bs-theme='light'][data-brand='black-red'] {
+  --on-bg: #ffffff;
+  --on-surface: #f8f8f8;
+  --on-card-bg: #ffffff;
+
+  --on-header-bg: #000000;
+  --on-header-text: #ffffff;
+  --on-header-link: #ffffff;
+
+  --on-footer-bg: #000000;
+  --on-footer-text: #ffffff;
+
+  --on-text: #111111;
+  --on-text-secondary: #4b5563;
+
+  --on-border: #dddddd;
+
+  --on-primary: #e7000b;
+  --on-primary-text: #ffffff;
+}
+
+
+/* =========================================================
+   6. DARK + BLACK & RED
+   ========================================================= */
+
+[data-bs-theme='dark'][data-brand='black-red'] {
+  --on-bg: #000000;
+  --on-surface: #111111;
+  --on-card-bg: #111111;
+
+  --on-header-bg: #000000;
+  --on-header-text: #ffffff;
+  --on-header-link: #ffffff;
+
+  --on-footer-bg: #000000;
+  --on-footer-text: #ffffff;
+
+  --on-text: #ffffff;
+  --on-text-secondary: #c5c5c5;
+
+  --on-border: #333333;
+
+  --on-primary: #e7000b;
+  --on-primary-text: #ffffff;
+}
+
+
+/* =========================================================
+   7. LIGHT + PURPLE
    ========================================================= */
 
 [data-bs-theme='light'][data-brand='purple'] {
   --on-bg: #ffffff;
   --on-surface: #faf7ff;
+  --on-card-bg: #ffffff;
 
   --on-header-bg: #7c3aed;
   --on-header-text: #ffffff;
@@ -146,18 +259,17 @@
 
   --on-primary: #7c3aed;
   --on-primary-text: #ffffff;
-
-  --on-card-bg: #ffffff;
 }
 
 
 /* =========================================================
-   4. DARK + PURPLE
+   8. DARK + PURPLE
    ========================================================= */
 
 [data-bs-theme='dark'][data-brand='purple'] {
   --on-bg: #0d0714;
   --on-surface: #171020;
+  --on-card-bg: #171020;
 
   --on-header-bg: #2e1065;
   --on-header-text: #ffffff;
@@ -173,18 +285,17 @@
 
   --on-primary: #c084fc;
   --on-primary-text: #190625;
-
-  --on-card-bg: #171020;
 }
 
 
 /* =========================================================
-   5. LIGHT + BLUE
+   9. LIGHT + BLUE
    ========================================================= */
 
 [data-bs-theme='light'][data-brand='blue'] {
   --on-bg: #ffffff;
   --on-surface: #f4f8ff;
+  --on-card-bg: #ffffff;
 
   --on-header-bg: #2563eb;
   --on-header-text: #ffffff;
@@ -200,18 +311,17 @@
 
   --on-primary: #2563eb;
   --on-primary-text: #ffffff;
-
-  --on-card-bg: #ffffff;
 }
 
 
 /* =========================================================
-   6. DARK + BLUE
+   10. DARK + BLUE
    ========================================================= */
 
 [data-bs-theme='dark'][data-brand='blue'] {
   --on-bg: #06111f;
   --on-surface: #0b1b30;
+  --on-card-bg: #0b1b30;
 
   --on-header-bg: #0b2545;
   --on-header-text: #eaf4ff;
@@ -227,18 +337,17 @@
 
   --on-primary: #60a5fa;
   --on-primary-text: #06111f;
-
-  --on-card-bg: #0b1b30;
 }
 
 
 /* =========================================================
-   7. LIGHT + GREEN
+   11. LIGHT + GREEN
    ========================================================= */
 
 [data-bs-theme='light'][data-brand='green'] {
   --on-bg: #ffffff;
   --on-surface: #f3fbf7;
+  --on-card-bg: #ffffff;
 
   --on-header-bg: #059669;
   --on-header-text: #ffffff;
@@ -254,18 +363,17 @@
 
   --on-primary: #059669;
   --on-primary-text: #ffffff;
-
-  --on-card-bg: #ffffff;
 }
 
 
 /* =========================================================
-   8. DARK + GREEN
+   12. DARK + GREEN
    ========================================================= */
 
 [data-bs-theme='dark'][data-brand='green'] {
   --on-bg: #061411;
   --on-surface: #0b211c;
+  --on-card-bg: #0b211c;
 
   --on-header-bg: #064e3b;
   --on-header-text: #ecfdf5;
@@ -281,18 +389,17 @@
 
   --on-primary: #34d399;
   --on-primary-text: #031a13;
-
-  --on-card-bg: #0b211c;
 }
 
 
 /* =========================================================
-   9. LIGHT + ORANGE
+   13. LIGHT + ORANGE
    ========================================================= */
 
 [data-bs-theme='light'][data-brand='orange'] {
   --on-bg: #ffffff;
   --on-surface: #fffaf5;
+  --on-card-bg: #ffffff;
 
   --on-header-bg: #ea580c;
   --on-header-text: #ffffff;
@@ -308,18 +415,17 @@
 
   --on-primary: #ea580c;
   --on-primary-text: #ffffff;
-
-  --on-card-bg: #ffffff;
 }
 
 
 /* =========================================================
-   10. DARK + ORANGE
+   14. DARK + ORANGE
    ========================================================= */
 
 [data-bs-theme='dark'][data-brand='orange'] {
   --on-bg: #170b05;
   --on-surface: #251209;
+  --on-card-bg: #251209;
 
   --on-header-bg: #431407;
   --on-header-text: #fff7ed;
@@ -335,19 +441,21 @@
 
   --on-primary: #fb923c;
   --on-primary-text: #241006;
-
-  --on-card-bg: #251209;
 }
 
 
 /* =========================================================
-   GLOBAL WEBSITE COLORS
+   15. GLOBAL WEBSITE COLORS
    ========================================================= */
 
 html,
 body,
 #app {
   min-height: 100%;
+}
+
+html {
+  background-color: var(--on-bg);
 }
 
 body {
@@ -359,4 +467,30 @@ body {
   transition:
     background-color 0.25s ease,
     color 0.25s ease;
+}
+
+#app {
+  background-color: var(--on-bg);
+  color: var(--on-text);
+}
+
+
+/* =========================================================
+   16. OPTIONAL SMOOTH THEME TRANSITIONS
+
+   Components using these variables will transition smoothly
+   between themes.
+   ========================================================= */
+
+.header,
+.footer,
+.product-card,
+.why-card,
+.design-demo-card,
+.theme-primary-card,
+.team-drawing-container {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
 }
