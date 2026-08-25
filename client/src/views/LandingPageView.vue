@@ -272,7 +272,10 @@ export default {
               rounded-4
             "
           >
-            <LandingPageTeamDrawing style="height: 120px" />
+            <LandingPageTeamDrawing 
+              class="landing-page-team-drawing"
+              style="height: 120px" 
+            />
           </div>
 
           <RouterLink

@@ -144,7 +144,7 @@
 
 
 /* =========================================================
-   3. LANDING PAGE DRAWING
+   3. LANDING PAGE & LANDING PAGE TEAM DRAWING
    ========================================================= */
 
 [data-bs-theme='light'] .landing-page-drawing {
@@ -152,6 +152,14 @@
 }
 
 [data-bs-theme='dark'] .landing-page-drawing {
+  filter: invert(1);
+}
+
+[data-bs-theme='light'] .landing-page-team-drawing {
+  filter: none;
+}
+
+[data-bs-theme='dark'] .landing-page-team-drawing {
   filter: invert(1);
 }
 
