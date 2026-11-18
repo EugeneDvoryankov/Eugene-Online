@@ -1,4 +1,31 @@
-server/node_modules/
+# Local environment files
+.env
+.env.*
+!.env.example
+!.env.*.example
+.envrc
+
+# Dependencies and generated output
 node_modules/
-/.env
-/.env.production
+dist/
+dist-ssr/
+coverage/
+*.tsbuildinfo
+.eslintcache
+*.log
+
+# Local database files and credentials
+/db-data/
+/pgdata/
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+*.key
+*.pem
+*.p12
+*.pfx
+
+# OS files
+.DS_Store
+Thumbs.db

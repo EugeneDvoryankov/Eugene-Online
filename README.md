@@ -1,109 +1,78 @@
-# Eugene-Online project repository
+# Eugene-Online
 
-## Directory Structure
-```
-./
-├─ client/ # Vue 3 frontend
-│ ├─ public/ # Static assets
-│ ├─ src/
-│ │ ├─ components/
-│ │ ├─ router/
-│ │ ├─ services/
-│ │ ├─ types/
-│ │ └─ views/
-│ ├─ .env
-│ └─ .env.production
-├─ server/ # Express backend
-│ ├─ src/
-│ │ ├─ db/
-│ │ ├─ middlewares/
-│ │ ├─ model/
-│ │ ├─ router/
-│ │ └─ service/
-│ │ └─ index.ts
-│ │ └─ start.ts # Setup Express app
-│ ├─ test/ # Unit & integration tests
-│ └─ eslint.config.mjs # ESLint configuration file
-├─ images/ # README images
-├─ Dockerfile
-├─ Dockerfile.production
-├─ docker-compose.yaml # Development Docker Compose
-└─ README.md
+Eugene-Online is a bilingual website for web development and IT consulting. Visitors can browse services, view the blog, and book consultations. Customers can sign in to manage their bookings and orders. The site opens in English and also supports Swedish.
+
+[Visit Eugene-Online](https://eugene-online.com/)
+
+## Project layout
+
+| Path | Purpose |
+| --- | --- |
+| `client/` | Vue 3, TypeScript, and Vite frontend |
+| `server/` | Express API with Sequelize and PostgreSQL |
+| `docker-compose.yaml` | Local development services |
+| `Dockerfile.production` | Production build with Express serving the Vue app |
+| `render.yaml` | Render Blueprint for the web service and database |
+
+## Run locally
+
+Install Docker with Docker Compose. From the repository root, copy the server environment template.
+
+```sh
+cp .env.example .env
 ```
 
+Edit the root `.env` and set the following values. Replace the password placeholder with a local development password.
 
-## Run project in development
-### Run containers
-`docker-compose up`
+```dotenv
+API_PORT=8080
+POSTGRES_USERNAME=eugene_online
+POSTGRES_PASSWORD=replace-with-a-local-password
+POSTGRES_HOST=database
+POSTGRES_DB=eugene_online
+```
 
-Access server with `localhost:8080`.
+Create `client/.env` with the local API address.
 
-Without docker you can navigate into each project and run `npm run dev`.
+```dotenv
+VITE_API_URL=http://localhost:8080/api
+```
 
-## Run project in production
-### Build production image
-`docker build --tag eugene-online:latest --platform linux/amd64 -f Dockerfile.production .`
+Start the development containers.
 
-Add .env.production in /client with VITE_API_URL. Vite environment variables must be prefixed with "VITE_".
+```sh
+docker compose up --build
+```
 
-Add .env.production in top level folder with the fields in .env.example.
+Open [the frontend](http://localhost:5173/). The API is at [localhost:8080/api](http://localhost:8080/api).
 
-### Run production image locally
-`docker run --rm --env-file .env --publish 3000:3000 eugene-online:latest`
+## Test and build
 
-## Run tests and linter
-### Run tests
-Running both unit tests and e2e tests.
+Install Node.js 24 and run these commands from the repository root.
 
-/server: `npm run test`
+```sh
+npm --prefix client ci
+npm --prefix server ci
+npm --prefix client run test:unit -- --run
+npm --prefix server run test -- --run
+npm --prefix client run build
+npm --prefix server run build
+```
 
-/client: `npm run test:unit`
+## Production deployment
 
-### Run linter
-`npm run lint`
+The Render Blueprint in `render.yaml` configures a Docker web service and a managed PostgreSQL database. Render supplies the private database connection as `DATABASE_URL`. The frontend uses the same-origin `/api` path in the production image.
 
-or install ESLint VSCode extension.
+Keep actual credentials in local environment files or in the hosting provider's environment settings. Use placeholders in any committed `.env.example` file.
 
-## API Overview
-### Users
-| Method | Path              | Description                     |
-|------:|-------------------|---------------------------------|
-| GET   | /users         | Get all users (admin)                  |
-| GET   | /users/me       | Retrieve the logged in user           |
-| GET   | /users/{id}       | Retrieve user by id (admin)           |
-| PATCH  | /users/{id}            | Update user               |
-| POST  | /users            | Create user               |
-| POST  | /users/login            | Return user object if authenticated               |
+## API overview
 
-### Products
-| Method | Path              | Description                     |
-|------:|-------------------|---------------------------------|
-| GET   | /products         | Get all products                  |
-| GET   | /products/{id}       | Retrieve product by id           |
-| PATCH  | /products/{id}            | Update product (admin)               |
-| POST  | /products            | Create product (admin)               |
+API routes use the `/api` prefix.
 
-### Orders
-| Method | Path              | Description                     |
-|------:|-------------------|---------------------------------|
-| GET   | /orders         | Get all orders                  |
-| GET   | /orders/me       | Retrieve orders that belong to the user           |
-| GET   | /orders/{id}       | Retrieve order by id           |
-| PATCH  | /orders/{id}            | Update order (admin)               |
-| POST  | /orders            | Create order               |
-| DELETE  | /orders/{id}            | Delete order               |
-
-### Bookings
-| Method | Path              | Description                     |
-|------:|-------------------|---------------------------------|
-| GET   | /bookings?from={date}&to={date}         | Get all bookings with optional query parameters<br>{date} = ISO8601 date                  |
-| GET   | /bookings/{id}       | Retrieve booking by id           |
-| POST  | /bookings            | Create booking               |
-| DELETE| /bookings/{id}       | Delete booking by id                   |
-
-### Blogs
-| Method | Path              | Description                     |
-|------:|-------------------|---------------------------------|
-| GET   | /blogs         | Get all blogs                  |
-| GET   | /blogs/{id}       | Retrieve blog by id           |
-| POST  | /blogs            | Create blog (admin)               |
+| Resource | Base path | Operations |
+| --- | --- | --- |
+| Users | `/api/users` | Register, sign in, and manage accounts |
+| Products | `/api/products` | Browse services and manage the service catalog |
+| Orders | `/api/orders` | Create, view, update, and delete orders with the appropriate permissions |
+| Bookings | `/api/bookings` | View availability, create bookings, and manage existing bookings |
+| Blog | `/api/blogs` | Read and manage posts |
