@@ -296,7 +296,7 @@ export default {
   <!-- WHATSAPP -->
   <div class="whatsapp-container">
     <a
-      href="https://wa.me/46736871302?text=Hej!%20Jag%20vill%20chatta%20med%20OnlineNow%20AB"
+      href="https://wa.me/46700171837?text=Hej!%20Jag%20vill%20chatta%20med%20OnlineNow%20AB"
       target="_blank"
       rel="noopener noreferrer"
       class="whatsapp-button"
