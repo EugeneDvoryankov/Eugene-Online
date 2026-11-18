@@ -1,9 +1,15 @@
 <script lang="ts">
+import { t } from '@/i18n';
+import { computed } from 'vue';
 import LandingPageDrawing from '@/components/icons/LandingPageDrawing.vue';
 import LandingPageTeamDrawing from '@/components/icons/LandingPageTeamDrawing.vue';
 import { BButton, BContainer } from 'bootstrap-vue-next';
 
 export default {
+  setup() {
+    const whatsappUrl = computed(() => `https://wa.me/46700171837?text=${encodeURIComponent(t('home.whatsappMessage'))}`);
+    return { t, whatsappUrl };
+  },
   components: {
     BContainer,
     BButton,
@@ -24,14 +30,13 @@ export default {
 </script>
 
 <template>
-  <!-- WHY ONLINE NOW -->
+  <!-- WHY EUGENE-ONLINE -->
   <BContainer fluid tag="section" class="why-section py-5">
     <div class="text-center mb-5">
-      <h2>Varför välja OnlineNow?</h2>
+      <h2>{{ t('home.why') }}</h2>
 
       <p class="why-subtitle">
-        Vi bygger moderna digitala lösningar som är snabba, flexibla och enkla
-        att vidareutveckla.
+        {{ t('home.intro') }}
       </p>
     </div>
 
@@ -40,12 +45,11 @@ export default {
       <div class="col-12 col-md-6 col-lg-3">
         <div class="why-card">
           <i class="bi bi-lightning-charge-fill why-icon">
-            Snabbt
+            {{ t('home.fast') }}
           </i>
 
           <p>
-            Moderna tekniker och effektiv utveckling ger snabba webbplatser
-            och kortare väg från idé till färdig produkt.
+            {{ t('home.fastDescription') }}
           </p>
         </div>
       </div>
@@ -54,12 +58,11 @@ export default {
       <div class="col-12 col-md-6 col-lg-3">
         <div class="why-card">
           <i class="bi bi-phone-fill why-icon">
-            Responsivt
+            {{ t('home.responsive') }}
           </i>
 
           <p>
-            Lösningen skalar korrekt till alla enheter. Den fungerar på mobil,
-            surfplatta och dator från första början.
+            {{ t('home.responsiveDescription') }}
           </p>
         </div>
       </div>
@@ -68,12 +71,11 @@ export default {
       <div class="col-12 col-md-6 col-lg-3">
         <div class="why-card">
           <i class="bi bi-palette-fill why-icon">
-            Flexibelt
+            {{ t('home.flexible') }}
           </i>
 
           <p>
-            Design, färger och funktioner kan anpassas efter företagets behov
-            och varumärke.
+            {{ t('home.flexibleDescription') }}
           </p>
         </div>
       </div>
@@ -82,12 +84,11 @@ export default {
       <div class="col-12 col-md-6 col-lg-3">
         <div class="why-card">
           <i class="bi bi-code-slash why-icon">
-            Utbyggbart
+            {{ t('home.extensible') }}
           </i>
 
           <p>
-            Vi bygger med återanvändbara komponenter så att lösningen kan växa
-            tillsammans med företaget.
+            {{ t('home.extensibleDescription') }}
           </p>
         </div>
       </div>
@@ -99,39 +100,38 @@ export default {
     <div class="design-demo-card">
       <div>
         <span class="design-demo-label">
-          INTERAKTIV DEMO
+          {{ t('home.demo') }}
         </span>
 
-        <h2>Testa vår design själv</h2>
+        <h2>{{ t('home.demoTitle') }}</h2>
 
         <p>
-          Välj en färg och se hur webbplatsens design kan anpassas
-          efter ditt företags varumärke.
+          {{ t('home.demoDescription') }}
         </p>
       </div>
 
       <div class="color-options">
         <button
           class="color-button color-purple"
-          aria-label="Lila"
+          :aria-label="t('home.purple')"
           @click="setBrandColor('purple')"
         ></button>
 
         <button
           class="color-button color-blue"
-          aria-label="Blå"
+          :aria-label="t('home.blue')"
           @click="setBrandColor('blue')"
         ></button>
 
         <button
           class="color-button color-green"
-          aria-label="Grön"
+          :aria-label="t('home.green')"
           @click="setBrandColor('green')"
         ></button>
 
         <button
           class="color-button color-orange"
-          aria-label="Orange"
+          :aria-label="t('home.orange')"
           @click="setBrandColor('orange')"
         ></button>
 
@@ -139,7 +139,7 @@ export default {
           class="reset-color-button"
           @click="resetBrandColor"
         >
-          Återställ
+          {{ t('home.reset') }}
         </button>
       </div>
     </div>
@@ -166,16 +166,15 @@ export default {
         "
       >
         <h1>
-          Vi löser det
+          {{ t('home.heroStart') }}
           <span class="fst-italic">
-            tråkiga
+            {{ t('home.heroEmphasis') }}
           </span>
-          tekniska
+          {{ t('home.heroEnd') }}
         </h1>
 
         <h3 class="hero-subtitle fs-4">
-          Sveriges mest unika konsultbolag specialiserad inom allting IT
-          vill jobba med dig, liten som stor
+          {{ t('home.heroDescription') }}
         </h3>
 
         <div class="d-flex flex-row gap-3 mt-4">
@@ -184,7 +183,7 @@ export default {
             size="lg"
             to="/products"
           >
-            Våra tjänster
+            {{ t('nav.services') }}
           </BButton>
 
           <!-- Theme-aware button -->
@@ -193,7 +192,7 @@ export default {
             size="lg"
             to="/register"
           >
-            Registrera dig
+            {{ t('home.signUp') }}
           </BButton>
         </div>
       </div>
@@ -234,10 +233,10 @@ export default {
           "
         >
           <h3>
-            Kom igång.
+            {{ t('home.getStarted') }}
 
             <span class="separate-line">
-              Börja med ett företagskonto.
+              {{ t('home.companyAccount') }}
             </span>
           </h3>
 
@@ -245,7 +244,7 @@ export default {
             class="theme-outline-button max-w-50"
             to="/register"
           >
-            Skapa konto
+            {{ t('home.createAccount') }}
           </BButton>
         </div>
 
@@ -283,7 +282,7 @@ export default {
             class="team-link d-flex align-items-center gap-2"
           >
             <h3 class="mb-0">
-              Möt teamet
+              {{ t('home.meetTeam') }}
             </h3>
 
             <i class="bi bi-arrow-up-right"></i>
@@ -296,11 +295,11 @@ export default {
   <!-- WHATSAPP -->
   <div class="whatsapp-container">
     <a
-      href="https://wa.me/46700171837?text=Hej!%20Jag%20vill%20chatta%20med%20OnlineNow%20AB"
+      :href="whatsappUrl"
       target="_blank"
       rel="noopener noreferrer"
       class="whatsapp-button"
-      aria-label="Chatta med oss på WhatsApp"
+      :aria-label="t('home.whatsappLabel')"
     >
       <span class="whatsapp-icon">
         <svg
@@ -315,7 +314,7 @@ export default {
       </span>
 
       <span class="whatsapp-text">
-        Chatta med oss
+        {{ t('home.chat') }}
       </span>
     </a>
   </div>
@@ -323,7 +322,7 @@ export default {
 
 <style scoped>
 /* =========================================================
-   WHY ONLINE NOW
+   WHY EUGENE-ONLINE
    ========================================================= */
 
 .why-section {

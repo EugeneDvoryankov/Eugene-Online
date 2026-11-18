@@ -2,8 +2,10 @@ import { useRouter } from 'vue-router';
 import { BButton, BCol, BContainer, BRow, useToast } from 'bootstrap-vue-next';
 import * as auth from '../services/auth';
 import * as api from '@/api';
+import { toggleLanguage } from '@/i18n';
 import ProductsView from '../views/ProductsView.vue';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { nextTick } from 'vue';
 import { mount, flushPromises } from '@vue/test-utils';
 
 
@@ -41,7 +43,7 @@ describe('ProductsView.vue', () => {
 
   it('Unit: Fetches and renders products when the component mounts', async () =>{
     const mockProducts = [
-      { id: '1', name: 'Website pack', describtion: 'Test', price: 1500 },
+      { id: '1', name: 'Webbpacket', description: 'Test', price: 1500 },
     ];
     (api.getProducts as any).mockResolvedValue(mockProducts);
 
@@ -51,9 +53,23 @@ describe('ProductsView.vue', () => {
     await flushPromises();
 
     expect(api.getProducts).toHaveBeenCalledTimes(1);
-    expect(wrapper.text()).toContain('Website pack');
-    expect(wrapper.text()).toContain('1500 kr');
-    expect(wrapper.text()).not.toContain('Kunde inte ladda in tjänsterna');
+    expect(wrapper.text()).toContain('Our services');
+    expect(wrapper.text()).toContain('Website package');
+    expect(wrapper.text()).toContain('SEK');
+    expect(wrapper.text()).toContain('1,500');
+
+    toggleLanguage();
+    try {
+      await nextTick();
+      expect(wrapper.text()).toContain('Våra tjänster');
+      expect(wrapper.text()).toContain('Webbpacket');
+      expect(wrapper.text()).toContain('kr');
+      expect(api.getProducts).toHaveBeenCalledTimes(1);
+    } finally {
+      toggleLanguage();
+      localStorage.removeItem('onlinenow-language');
+      wrapper.unmount();
+    }
   });
 
   it('Unit (Error): Show error messages if backend crashes during fetch', async () => {
@@ -64,7 +80,7 @@ describe('ProductsView.vue', () => {
     });
     await flushPromises();
 
-    expect(wrapper.text()).toContain('Kunde inte ladda in tjänsterna');
+    expect(wrapper.text()).toContain('Could not load the services');
   });
 
   it('Unit (Error): Warns and redirects unauthenticated user to /login on buy', async () => {

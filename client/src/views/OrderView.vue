@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { t } from '@/i18n';
 import { computed, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type { Order } from '@/types';
@@ -21,7 +22,7 @@ const error = ref('');
 
 const orderId = computed(() => String(route.params.orderId ?? ''));
 
-const steps = ['Ordern accepterad', 'Under utveckling', 'Under testning', 'Ordern slutförd'];
+const steps = ['order.accepted', 'order.developing', 'order.testing', 'order.completed'] as const;
 
 const statusIndex = computed(() => {
   const s = order.value?.status;
@@ -29,7 +30,7 @@ const statusIndex = computed(() => {
   return 0;
 });
 
-const statusText = computed(() => steps[statusIndex.value] ?? 'unknown');
+const statusText = computed(() => t(steps[statusIndex.value] ?? 'common.unknown'));
 
 async function load() {
   error.value = '';
@@ -41,7 +42,7 @@ async function load() {
   }
   
   if (!orderId.value) {
-    toast.create({ title: 'Order-ID saknas', variant: 'danger' });
+    toast.create({ title: t('order.missingId'), variant: 'danger' });
     return;
   }
 
@@ -50,7 +51,7 @@ async function load() {
     order.value = await api.getOrder(orderId.value);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    toast.create({ title: 'Kunde inte hämta ordern', body: 'Försök igen senare.', variant: 'danger' });
+    toast.create({ title: t('order.loadError'), body: t('common.tryAgain'), variant: 'danger' });
   } finally {
     loading.value = false;
   }
@@ -61,12 +62,12 @@ watch(orderId, () => load(), { immediate: true });
 
 <template>
   <div class="container padding-bottom-3x mb-1">
-    <div v-if="loading" class="text-muted">Laddar...</div>
+    <div v-if="loading" class="text-muted">{{ t('common.loading') }}</div>
     <div v-else-if="error" class="alert alert-danger">{{ error }}</div>
 
     <main v-else-if="order" class="card mb-3">
       <div class="p-4 text-center text-white text-lg bg-dark rounded-top">
-        <span class="text-uppercase">Order id - </span>
+        <span class="text-uppercase">{{ t('order.idLabel') }} </span>
         <span class="text-medium">{{ orderId }}</span>
       </div>
 
@@ -80,25 +81,25 @@ watch(orderId, () => load(), { immediate: true });
         v-if="statusIndex === 0"
         :src="orderAcceptedImg"
         class="img-fluid d-block mx-auto my-3"
-        alt="Order accepted"
+        :alt="t('order.accepted')"
       />
       <img
         v-if="statusIndex === 1"
         :src="underDevelopmentImg"
         class="img-fluid d-block mx-auto my-3"
-        alt="Under development"
+        :alt="t('order.developing')"
       />
       <img
         v-if="statusIndex === 2"
         :src="underTestingImg"
         class="img-fluid d-block mx-auto my-3"
-        alt="Under testing"
+        :alt="t('order.testing')"
       />
       <img
         v-if="statusIndex === 3"
         :src="orderCompletedImg"
         class="img-fluid d-block mx-auto my-3"
-        alt="Order completed"
+        :alt="t('order.completed')"
       />
     </main>
   </div>

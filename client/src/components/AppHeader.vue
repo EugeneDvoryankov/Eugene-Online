@@ -7,46 +7,54 @@
       <RouterLink to="/" class="logo-link d-none d-md-flex">
         
         <img 
-            src="./onlinenow-logo.svg"
-            alt="OnlineNow AB"
+            src="./eugene-online-logo.svg"
+            alt=""
             class="company-logo"
           />  
 
-        <span class="company-name text-white">ONLINENOW AB</span>
+        <span class="company-name text-white">{{ brandName }}</span>
 
       </RouterLink>
 
       <div class="header-right">
-        <div class="d-flex">
+        <div class="d-flex flex-wrap align-items-center">
           <BButton
             variant="link"
             class="theme-toggle"
             @click="toggleTheme"
-            :aria-label="mode === 'dark' ? 'Byt till ljust tema' : 'Byt till mörkt tema'"
-            :title="mode === 'dark' ? 'Byt till ljust tema' : 'Byt till mörkt tema'"
+            :aria-label="mode === 'dark' ? t('nav.lightTheme') : t('nav.darkTheme')"
+            :title="mode === 'dark' ? t('nav.lightTheme') : t('nav.darkTheme')"
           >
             <i
               class="bi"
               :class="mode === 'dark' ? 'bi-moon-fill' : 'bi-sun-fill'"
             ></i>
           </BButton>
+          <button
+            type="button"
+            class="language-toggle"
+            :lang="language === 'en' ? 'sv' : 'en'"
+            @click="toggleLanguage"
+          >
+            {{ language === 'en' ? 'Svenska' : 'English' }}
+          </button>
           <RouterLink
             to="/" class="header-link">
-            Hem
+            {{ t('nav.home') }}
           </RouterLink>
           <RouterLink
             to="/about-us" class="header-link"
           >
-            Om oss
+            {{ t('nav.about') }}
           </RouterLink>
           <RouterLink
             to="/products" class="header-link"
           >
-            Våra tjänster
+            {{ t('nav.services') }}
           </RouterLink>
           <RouterLink 
             to="/contact" class="header-link"
-            >Kontakta oss
+            >{{ t('nav.contact') }}
           </RouterLink>
         </div>
       </div>
@@ -59,12 +67,14 @@
 </template>
 
 <script lang="ts">
+import { brandName } from '@/branding';
+import { language, t, toggleLanguage } from '@/i18n';
 import { RouterLink, useRouter } from 'vue-router';
 import * as auth from '../services/auth';
 import type { User } from '@/types';
 import * as api from '../api';
 import BookingModal from './BookingModal.vue';
-import { BDropdown, BDropdownItem, useColorMode } from 'bootstrap-vue-next';
+import { BButton, BDropdown, BDropdownItem, useColorMode } from 'bootstrap-vue-next';
 
 /* const username = computed(() => {
   if (!email.value) return "";
@@ -76,6 +86,7 @@ export default {
   components: {
     RouterLink,
     BookingModal,
+    BButton,
     BDropdown,
     BDropdownItem,
   },
@@ -112,16 +123,14 @@ export default {
   setup() {
     const router = useRouter();
 
-    const mode = useColorMode({
-      persist: true,
-      initialValue: 'dark',
-    });
+    const colorModeOptions = { persist: true, initialValue: 'dark' } as const;
+    const mode = useColorMode(colorModeOptions);
 
     function toggleTheme() {
       mode.value = mode.value === 'dark' ? 'light' : 'dark'; 
     }
 
-    return { router, mode, toggleTheme };
+    return { brandName, t, language, toggleLanguage, router, mode, toggleTheme };
     
   },
   async mounted() {
@@ -167,6 +176,19 @@ export default {
 
 .theme-toggle:hover {
   color: var(--on-header-link);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.language-toggle {
+  margin-inline: 0.35rem;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--on-header-link);
+}
+
+.language-toggle:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
 

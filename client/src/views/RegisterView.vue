@@ -1,4 +1,5 @@
 <script lang="ts">
+import { t } from '@/i18n';
 import { BButton, BCol, BContainer, BForm, BFormGroup, BFormInput, BRow, useToast } from 'bootstrap-vue-next';
 import * as api from '../api';
 import { useRouter } from 'vue-router';
@@ -19,7 +20,7 @@ export default {
     const toast = useToast();
     // You should be able to use this.$router but TypeScript complains about it
     const router = useRouter();
-    return { toast, router };
+    return { t, toast, router };
   },
   methods: {
     async onSubmit(event: Event) {
@@ -28,11 +29,11 @@ export default {
       try {
         await api.createUser(this.email, this.password, this.companyName);
         await auth.setCredentials(this.email, this.password);
-        this.toast.create({ title: 'Konto skapat', body: 'Du är nu inloggad.', variant: 'success' });
+        this.toast.create({ title: t('auth.created'), body: t('auth.loginConfirmed'), variant: 'success' });
         this.router.push('/');
       } catch (error) {
-        const title = 'Kunde inte registrera användare';
-        let body = 'Försök igen senare.';
+        const title = t('auth.registerFailed');
+        let body = t('common.tryAgain');
         if (error instanceof Error) {
           body = error.message;
         }
@@ -53,19 +54,19 @@ export default {
         md="6"
         lg="6"
       >
-        <h1>Registrera konto</h1>
+        <h1>{{ t('auth.register') }}</h1>
         <BForm @submit="onSubmit">
           <!-- Email address -->
           <BFormGroup
             id="input-group-1"
-            label="Mejladress:"
+            :label="t('auth.email')"
             label-for="input-1"
           >
             <BFormInput
               id="input-1"
               v-model="email"
               type="email"
-              placeholder="Email..."
+              :placeholder="t('auth.emailPlaceholder')"
               required
             />
           </BFormGroup>
@@ -73,14 +74,14 @@ export default {
           <!-- Password -->
           <BFormGroup
             id="input-group-2"
-            label="Lösenord:"
+            :label="t('auth.password')"
             label-for="input-2"
           >
             <BFormInput
               id="input-2"
               v-model="password"
               type="password"
-              placeholder="Lösenord..."
+              :placeholder="t('auth.passwordPlaceholder')"
               required
             />
           </BFormGroup>
@@ -88,13 +89,13 @@ export default {
           <!-- Company name -->
           <BFormGroup
             id="input-group-2"
-            label="Företagsnamn:"
+            :label="t('auth.company')"
             label-for="input-2"
           >
             <BFormInput
               id="input-2"
               v-model="companyName"
-              placeholder="Ditt företag..."
+              :placeholder="t('auth.companyPlaceholder')"
               required
             />
           </BFormGroup>
@@ -106,14 +107,14 @@ export default {
               to="/login"
               class="text-nowrap"
             >
-              Har du redan ett konto?
+              {{ t('auth.hasAccount') }}
             </BButton>
             <BButton
               type="submit"
               variant="primary"
               class="text-nowrap"
             >
-              Registrera
+              {{ t('auth.signUp') }}
             </BButton>
           </div>
         </BForm>

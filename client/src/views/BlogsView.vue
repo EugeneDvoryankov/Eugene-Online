@@ -1,4 +1,5 @@
 <script lang="ts">
+import { formatLocale, t } from '@/i18n';
 import type { Blog } from '@/types';
 import { BCol, BContainer, BLink, BRow, useToast } from 'bootstrap-vue-next';
 import * as api from '../api';
@@ -18,14 +19,14 @@ export default {
         this.blogs = blogs;
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
-        this.toast.create({ title: 'Kunde inte hämta blogg', body: 'Försök igen senare.', variant: 'danger' });
+        this.toast.create({ title: t('blog.loadError'), body: t('common.tryAgain'), variant: 'danger' });
       }
     },
   },
   setup() {
     const toast = useToast();
     const route = useRoute();
-    return { toast, route };
+    return { t, formatLocale, toast, route };
   },
   async mounted() {
     await this.fetchBlogs();
@@ -52,7 +53,7 @@ export default {
   <BContainer fluid>
     <BRow class="justify-content-center py-5">
       <BCol cols="8" class="d-flex flex-column gap-4">
-        <h1>Det senaste från oss</h1>
+        <h1>{{ t('blog.title') }}</h1>
         <BContainer v-if="(blogs || []).length > 0">
           <BContainer
             v-for="blog in blogs"
@@ -67,12 +68,12 @@ export default {
                 <h1>{{ blog.title }}</h1>
                 <BLink :to="`/blogs#blog-${blog.id}`" underline-offset="1" class="fs-4">#</BLink>
               </div>
-              <span class="text-secondary">Publicerad den {{ new Date(blog.uploadAt).toLocaleDateString('sv-SE', { day: '2-digit', month: 'long', year: 'numeric' }) }}</span>
+              <span class="text-secondary">{{ t('blog.published') }} {{ new Date(blog.uploadAt).toLocaleDateString(formatLocale, { day: '2-digit', month: 'long', year: 'numeric' }) }}</span>
             </div>
             <p>{{ blog.content }}</p>
           </BContainer>
         </BContainer>
-        <BContainer v-else class="text-secondary">Vi har inga inlägg att visa för tillfället.</BContainer>
+        <BContainer v-else class="text-secondary">{{ t('blog.empty') }}</BContainer>
       </BCol>
     </BRow>
   </BContainer>

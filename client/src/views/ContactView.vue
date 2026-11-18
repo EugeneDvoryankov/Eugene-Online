@@ -1,25 +1,26 @@
 <template>
   <main class="contact-container">
-    <h1>Kontakta oss</h1>
-    <p>Har du frågor? Skicka ett meddelande så hör vi av oss!</p>
+    <h1>{{ t('nav.contact') }}</h1>
+    <p>{{ t('contact.intro') }}</p>
   
     <form @submit.prevent="submitForm">
-      <label>Namn</label>
+      <label>{{ t('contact.name') }}</label>
       <input v-model="form.name" type="text" required />
   
-      <label>Meddelande</label>
+      <label>{{ t('contact.message') }}</label>
       <textarea v-model="form.message" rows="5" required></textarea>
   
-      <button type="submit" class="btn btn-primary">Skicka</button>
+      <button type="submit" class="btn btn-primary">{{ t('contact.send') }}</button>
     </form>
   
-    <p v-if="successMessage" class="success">
-      {{ successMessage }}
+    <p v-if="mailOpened" class="success">
+      {{ t('contact.success') }}
     </p>
   </main>
 </template>
   
 <script lang="ts" setup>
+import { t } from '@/i18n';
 import { reactive, ref } from 'vue';
   
 const form = reactive({
@@ -27,13 +28,15 @@ const form = reactive({
   message: '',
 });
   
-const successMessage = ref('');
+const mailOpened = ref(false);
   
 const submitForm = () => {
-  const mailtoLink = `mailto:support@onlinenow.com?subject=Kontakt från ${form.name}&body=${form.message}`;
+  const subject = encodeURIComponent(`${t('contact.subject')} ${form.name}`);
+  const body = encodeURIComponent(form.message);
+  const mailtoLink = `mailto:support@onlinenow.com?subject=${subject}&body=${body}`;
   globalThis.location.href = mailtoLink;
   
-  successMessage.value = 'Tack! Ditt mailprogram öppnas nu.';
+  mailOpened.value = true;
   
   form.name = '';
   form.message = '';

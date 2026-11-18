@@ -1,4 +1,5 @@
 <script lang="ts">
+import { t } from '@/i18n';
 import { BContainer } from 'bootstrap-vue-next';
 
 interface Job {
@@ -10,41 +11,44 @@ interface Job {
 }
 
 export default {
+  setup() {
+    return { t };
+  },
   components: { BContainer },
 
-  data() {
-    return {
-      jobs: [
+  computed: {
+    jobs(): Job[] {
+      return [
         {
           id: 1,
-          title: 'Fullstack-utvecklare (Vue/node.js)',
+          title: t('career.jobFullstack'),
           location: 'Stockholm (Hybrid)',
-          type: 'Heltid',
-          description: 'Var med och utveckla webbplatser och moderna webbapplikationer. Du kommer arbeta över hela stacken med fokus på prestanda och skalbarhet',
+          type: t('career.fullTime'),
+          description: t('career.jobFullstackDescription'),
         },
         {
           id: 2,
-          title: 'UI/UX designer & Varumärkesstrateg',
-          location: 'Göteborg (Hybrid)',
-          type: 'Deltid',
-          description: 'Hjälp våra kunder att hitta sin visuella identitet.',
+          title: t('career.jobDesign'),
+          location: t('career.gothenburgHybrid'),
+          type: t('career.partTime'),
+          description: t('career.jobDesignDescription'),
         },
         {
           id: 3,
-          title: 'Backend-utvecklare (PostgreSQL/Express)',
+          title: t('career.jobBackend'),
           location: 'Stockholm (Hybrid)',
-          type: 'Heltid',
-          description: 'Vi söker dig som brinner för databaser, API-design och säkerhet. Du kommer spela en nyckelroll i att bygga robusta system för våra största kundprojekt.',
+          type: t('career.fullTime'),
+          description: t('career.jobBackendDescription'),
         },
         {
           id: 4,
-          title: 'Digital Marknadsförare & SEO-specilaist',
-          location: 'Göteborg (På plats)',
-          type: 'Heltid',
-          description: 'Driv trafik och skapa mätbara resultat! Du kommer att hjälpa våra kunder att nå rätt målgrupp digitalt.',
+          title: t('career.jobMarketing'),
+          location: t('career.gothenburgOnSite'),
+          type: t('career.fullTime'),
+          description: t('career.jobMarketingDescription'),
         },
-      ] as Job [],
-    };
+      ];
+    },
   },
 };
 </script>
@@ -52,12 +56,12 @@ export default {
 <template>
   <BContainer fluid="md" class="py-5 overflow-x-hidden">
     <div class="text-center mb-5 py-5 bg-light rounded-4 shadow-sm border">
-      <h1 class="display-4 fw-bold">Karriär hos oss</h1>
-      <p class="fs-5 text-secondary mx-auto mt-3">Bli en del av vårt växande team!</p>
+      <h1 class="display-4 fw-bold">{{ t('career.title') }}</h1>
+      <p class="fs-5 text-secondary mx-auto mt-3">{{ t('career.intro') }}</p>
     </div>
         
     <div class="job-list-container mx-auto" style="max-width: 900px;">
-      <h3 class="mb-4 fw-bold border-bottom pb-3 text-dark">Lediga tjänster ({{ jobs.length }})</h3>
+      <h3 class="mb-4 fw-bold border-bottom pb-3 text-dark">{{ t('career.openings') }} ({{ jobs.length }})</h3>
 
       <div 
         v-for="job in jobs" 

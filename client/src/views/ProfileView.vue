@@ -1,4 +1,5 @@
 <script lang="ts">
+import { formatLocale, t } from '@/i18n';
 import type { Booking, Order } from '@/types';
 import * as api from '../api';
 import { BAlert, BDropdown, BDropdownItem, useToast } from 'bootstrap-vue-next';
@@ -53,7 +54,7 @@ export default {
         this.password = '';
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
-        this.toast.create({ title: 'Kunde inte hämta din profil', body: 'Försök igen senare.', variant: 'danger' });
+        this.toast.create({ title: t('profile.loadError'), body: t('common.tryAgain'), variant: 'danger' });
       }
     },
 
@@ -70,7 +71,7 @@ export default {
         if (password) payload.password = password;
 
         if (Object.keys(payload).length === 0) {
-          this.toast.create({ title: 'Inget att spara', body: 'Fyll i minst ett fält.', variant: 'warning' });
+          this.toast.create({ title: t('profile.nothingToSave'), body: t('profile.fillOneField'), variant: 'warning' });
         }
 
         await api.updateUser(userId, payload);
@@ -80,11 +81,11 @@ export default {
           auth.setCredentials(myUser.email, password);
         }
         this.password = '';
-        this.toast.create({ title: 'Profil uppdaterad', body: 'Dina uppgifter har sparats.', variant: 'success' });
+        this.toast.create({ title: t('profile.updated'), body: t('profile.saved'), variant: 'success' });
         await this.fetchProfile();
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
-        this.toast.create({ title: 'Kunde inte updatera din profil', body: 'Försök igen senare.', variant: 'danger' });
+        this.toast.create({ title: t('profile.updateError'), body: t('common.tryAgain'), variant: 'danger' });
       }
     },
 
@@ -109,21 +110,21 @@ export default {
         this.bookings = [...futureBookings].sort((a, b) => a.dateObj.getTime() - b.dateObj.getTime());
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
-        this.bookingsError = 'Kunde inte hämta dina bokningar';
+        this.bookingsError = t('profile.bookingsError');
       }
 
       if (this.bookings.length <= 0) {
-        this.bookingsError = 'Du har inga bokningar';
+        this.bookingsError = t('profile.noBookings');
       }
     },
 
     async deleteBooking(bookingId: string) {
       try {
         await api.deleteBooking(bookingId);
-        this.toast.create({ title: 'Avbokad', body: 'Återkom när som helst.', variant: 'success' });
+        this.toast.create({ title: t('profile.bookingCancelled'), body: t('profile.bookAgain'), variant: 'success' });
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
-        this.toast.create({ title: 'Kunde inte avboka', body: 'Försök igen senare.', variant: 'danger' });
+        this.toast.create({ title: t('profile.cancelError'), body: t('common.tryAgain'), variant: 'danger' });
       }
       await this.fetchBookings();
     },
@@ -133,7 +134,7 @@ export default {
         this.orders = await api.getMyOrders();
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
-        this.toast.create({ title: 'Kunde inte hämta dina ordrar', body: 'Försök igen senare.', variant: 'danger' });
+        this.toast.create({ title: t('profile.ordersError'), body: t('common.tryAgain'), variant: 'danger' });
       }
     },
 
@@ -148,7 +149,7 @@ export default {
     async submitOrder() {
       const productId = this.newProductId.trim();
       if (!productId) {
-        this.toast.create({ title: 'Produkt-ID saknas', body: 'Vänligen ange ett produkt-ID.', variant: 'warning' });
+        this.toast.create({ title: t('profile.missingProduct'), body: t('profile.enterProduct'), variant: 'warning' });
         return;
       }
 
@@ -158,13 +159,13 @@ export default {
         const created = await api.createOrder(productId);
         this.orders = [created, ...this.orders];
 
-        this.toast.create({ title: 'Ordern skapad', body: 'Ordern har skapats.', variant: 'success' });
+        this.toast.create({ title: t('profile.orderCreated'), body: t('profile.orderCreatedMessage'), variant: 'success' });
 
         this.newProductId = '';
         this.closeCreateOrderModal();
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
-        this.toast.create({ title: 'Kunde inte skapa ordern', body: 'Försök igen senare.', variant: 'danger' });
+        this.toast.create({ title: t('profile.createError'), body: t('common.tryAgain'), variant: 'danger' });
       } finally {
         this.isCreatingOrder = false;
       }
@@ -173,19 +174,20 @@ export default {
     orderTitle(o: Order) {
       const orderId = o.orderId;
       const productId = o.productId;
-      return `Order #${orderId} (Product ${productId})`;
+      return `${t('pages.order')} #${orderId} (${t('profile.product')} ${productId})`;
     },
 
     statusText(o: Order): string {
       const s = o.status;
       if (typeof s === 'string') return s;
-      const statusArray = ['Accepterad', 'Utveckling', 'Testning', 'Slutförd'];
+      const statusArray = [t('order.acceptedBrief'), t('order.developingBrief'), t('order.testingBrief'), t('order.completedBrief')];
       if (typeof s === 'number' && statusArray[s] ) return statusArray[s];
-      return 'unknown';
+      return t('common.unknown');
     },
 
     statusBadgeClass(o: Order) {
-      const txt = this.statusText(o).toLowerCase();
+      const txt = String(o.status).toLowerCase();
+      if (txt === '0') return 'bg-info';
       if (txt.includes('reject')) return 'bg-danger';
       if (txt.includes('pend')) return 'bg-secondary';
       if (txt.includes('approve') || txt.includes('done')) return 'bg-success';
@@ -194,8 +196,8 @@ export default {
     },
 
     orderMeta(o: Order) {
-      const userId = `User: ${o.userId}`;
-      const productId = `Product: ${o.productId}`;
+      const userId = `${t('profile.user')}: ${o.userId}`;
+      const productId = `${t('profile.product')}: ${o.productId}`;
       const parts = [productId, userId];
       return parts.join(' • ');
     },
@@ -204,7 +206,7 @@ export default {
       const timestampString = o.date;
       if (!timestampString) return '';
       const d = new Date(timestampString);
-      return d.toLocaleString('sv-SE');
+      return d.toLocaleString(formatLocale.value);
     },
 
     viewOrder(o: Order) {
@@ -216,7 +218,7 @@ export default {
     payOrder(o: Order) {
       const orderId = o.orderId;
       if (orderId == null) {
-        this.toast.create({ title: 'Missing order id', body: 'Could not start payment.', variant: 'danger' });
+        this.toast.create({ title: t('order.missingId'), body: t('profile.startPaymentError'), variant: 'danger' });
         return;
       }
       this.router.push(`/orders/${orderId}/payment`);
@@ -226,7 +228,7 @@ export default {
   setup() {
     const toast = useToast();
     const router = useRouter();
-    return { toast, router };
+    return { t, formatLocale, toast, router };
   },
 
   async mounted() {
@@ -253,13 +255,13 @@ export default {
                 <div class="d-flex flex-column align-items-center text-center">
                   <img
                     src="https://bootdey.com/img/Content/avatar/avatar6.png"
-                    alt="Admin"
+                    :alt="t('profile.avatar')"
                     class="rounded-circle p-1 bg-primary"
                     width="110"
                   />
                   <div class="mt-3">
-                    <h1>{{ companyName || 'Företagsnamn' }}</h1>
-                    <h4>{{ email || 'E-post' }}</h4>
+                    <h1>{{ companyName || t('profile.company') }}</h1>
+                    <h4>{{ email || t('profile.email') }}</h4>
                   </div>
                 </div>
 
@@ -267,32 +269,32 @@ export default {
 
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                    <h6 class="mb-0">Lösenord</h6>
+                    <h6 class="mb-0">{{ t('profile.password') }}</h6>
                     <div class="text-secondary flex-grow-1 ms-2" style="max-width: 60%;">
                       <input 
                         v-model="password" 
                         type="password"
                         class="form-control"
-                        placeholder="Lämna tomt för att behålla nuvarande lösenord"
+                        :placeholder="t('profile.keepPassword')"
                       />
                     </div>
                   </li>
 
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                    <h6 class="mb-0">Mobil</h6>
+                    <h6 class="mb-0">{{ t('profile.mobile') }}</h6>
                     <div class="text-secondary flex-grow-1 ms-2" style="max-width: 60%;">
                       <input 
                         v-model="phoneNumber"
                         type="text"
                         class="form-control"
-                        placeholder="Lägg till telefonnummer"
+                        :placeholder="t('profile.addPhone')"
                       />
                     </div>
                   </li>
                 </ul>
                 <div class="w-100 d-flex justify-content-end px-3">
                   <button class="btn btn-primary btn-sm" type="button" @click="updateProfile">
-                    Spara
+                    {{ t('profile.save') }}
                   </button>
                 </div>
               </div>
@@ -307,25 +309,25 @@ export default {
               class="full-width-alert"
             >
               <div class="w-100 d-flex justify-content-between align-items-center">
-                <span>Kommande bokning den {{ booking.dateObj.toLocaleDateString('sv-se', { day: 'numeric', month: 'long' }) }} kl {{ booking.dateObj.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' }) }}</span>
+                <span>{{ t('profile.upcomingBooking') }} · {{ booking.dateObj.toLocaleString(formatLocale, { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }) }}</span>
                 <BDropdown
                   variant="light"
                   text="&#8942;"
                   class="me-2"
                   no-caret
                 >
-                  <BDropdownItem @click="deleteBooking(booking.id)">Avboka</BDropdownItem>
+                  <BDropdownItem @click="deleteBooking(booking.id)">{{ t('profile.cancelBooking') }}</BDropdownItem>
                 </BDropdown>
               </div>
             </BAlert>
             <div class="card">
               <div class="card-header d-flex justify-content-between align-items-center">
-                <strong>Orderhistorik</strong>
+                <strong>{{ t('profile.orders') }}</strong>
               </div>
 
               <div class="card-body d-flex flex-column gap-3">
                 <div v-if="orders.length === 0" class="text-muted">
-                  Inga beställningar gjorda
+                  {{ t('profile.noOrders') }}
                 </div>
 
                 <div v-for="o in orders" :key="o.orderId" class="d-flex gap-3 align-items-start border rounded p-2">
@@ -338,7 +340,7 @@ export default {
                       <div class="d-flex gap-2">
                         <span class="badge" :class="statusBadgeClass(o)">{{ statusText(o) }}</span>
                         <span class="badge" :class="o.isPaid ? 'bg-success' : 'bg-info'">
-                          {{ o.isPaid ? 'Betald' : 'Inte Betald' }}
+                          {{ o.isPaid ? t('order.paid') : t('order.unpaid') }}
                         </span>
                       </div>
                     </div>
@@ -348,14 +350,14 @@ export default {
                     </div>
 
                     <div class="mt-2 d-flex gap-2">
-                      <button class="btn btn-success btn-sm" type="button" @click="viewOrder(o)">Visa</button>
+                      <button class="btn btn-success btn-sm" type="button" @click="viewOrder(o)">{{ t('profile.viewOrder') }}</button>
                       <button
                         v-if="!o.isPaid"
                         class="btn btn-info btn-sm"
                         type="button"
                         @click="payOrder(o)"
                       >
-                        Betala
+                        {{ t('profile.payOrder') }}
                       </button>
                     </div>
 
@@ -382,30 +384,30 @@ export default {
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Create order</h5>
+              <h5 class="modal-title">{{ t('profile.createOrder') }}</h5>
               <button
                 type="button"
                 class="btn-close"
                 @click="closeCreateOrderModal"
-                aria-label="Close"
+                :aria-label="t('common.close')"
               ></button>
             </div>
 
             <div class="modal-body">
               <div class="mb-3">
-                <label class="form-label">Product ID</label>
+                <label class="form-label">{{ t('profile.productId') }}</label>
                 <input
                   v-model="newProductId"
                   type="text"
                   class="form-control"
-                  placeholder="e.g. 101"
+                  :placeholder="t('profile.productExample')"
                 />
               </div>
             </div>
 
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-secondary" @click="closeCreateOrderModal">
-                Avbryt
+                {{ t('common.cancel') }}
               </button>
 
               <button
@@ -414,7 +416,7 @@ export default {
                 @click="submitOrder"
                 :disabled="isCreatingOrder || !newProductId.trim()"
               >
-                {{ isCreatingOrder ? 'Creating...' : 'Create' }}
+                {{ isCreatingOrder ? t('profile.creating') : t('profile.create') }}
               </button>
             </div>
           </div>

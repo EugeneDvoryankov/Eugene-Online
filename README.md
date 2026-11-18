@@ -1,8 +1,8 @@
-# Onlinenow project repository
+# Eugene-Online project repository
 
 ## Directory Structure
 ```
-onlinenow/
+./
 ├─ client/ # Vue 3 frontend
 │ ├─ public/ # Static assets
 │ ├─ src/
@@ -42,14 +42,14 @@ Without docker you can navigate into each project and run `npm run dev`.
 
 ## Run project in production
 ### Build production image
-`docker build --tag onlinenow:latest --platform linux/amd64 -f Dockerfile.production .`
+`docker build --tag eugene-online:latest --platform linux/amd64 -f Dockerfile.production .`
 
 Add .env.production in /client with VITE_API_URL. Vite environment variables must be prefixed with "VITE_".
 
 Add .env.production in top level folder with the fields in .env.example.
 
 ### Run production image locally
-`docker run --rm --env-file .env --publish 3000:3000 onlinenow:latest`
+`docker run --rm --env-file .env --publish 3000:3000 eugene-online:latest`
 
 ## Run tests and linter
 ### Run tests

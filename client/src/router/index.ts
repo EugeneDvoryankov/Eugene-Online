@@ -1,3 +1,4 @@
+import { brandName } from '@/branding';
 import AboutUsView from '@/views/AboutUsView.vue';
 import ContactView from '@/views/ContactView.vue';
 import DashboardBookingView from '@/views/DashboardBookingView.vue';
@@ -12,24 +13,30 @@ import ProductsView from '@/views/ProductsView.vue';
 import ProfileView from '@/views/ProfileView.vue';
 import RegisterView from '@/views/RegisterView.vue';
 import * as auth from '../services/auth';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
+import type { MessageKey } from '@/i18n';
 import BlogsView from '@/views/BlogsView.vue';
 import DashboardBlogView from '@/views/DashboardBlogView.vue';
 import CareerView from '@/views/CareerView.vue';
 import PaymentView from '@/views/PaymentView.vue';
 
-const routes = [
-  { path: '/', component: LandingPageView, meta: { title: 'Start | OnlineNow' } },
-  { path: '/products', component: ProductsView, meta: { title: 'Tjänster | OnlineNow' } },
-  // { path: '/order', component: OrderView, meta: { title: 'Din Order | OnlineNow' } },
-  { path: '/orders/:orderId', name: 'order', component: OrderView, meta: { title: 'Order | OnlineNow' } },  
-  { path: '/profile', component: ProfileView, meta: { title: 'Profil | OnlineNow' } },
-  { path: '/about-us', component: AboutUsView, meta: { title: 'Om Oss | OnlineNow' } },
-  { path: '/contact', component: ContactView, meta: { title: 'Kontakta Oss | OnlineNow' } },
-  { path: '/career', component: CareerView },
-  { path: '/register', component: RegisterView, meta: { title: 'Registrera Konto | OnlineNow' } },
-  { path: '/login', component: LoginView, meta: { title: 'Logga In | OnlineNow' } },
-  { path: '/orders/:orderId/payment', component: PaymentView, meta: { title: 'Betalning | OnlineNow' } },
+declare module 'vue-router' {
+  interface RouteMeta {
+    titleKey?: MessageKey;
+  }
+}
+
+const routes: RouteRecordRaw[] = [
+  { path: '/', component: LandingPageView, meta: { titleKey: 'pages.home' } },
+  { path: '/products', component: ProductsView, meta: { titleKey: 'pages.services' } },
+  { path: '/orders/:orderId', name: 'order', component: OrderView, meta: { titleKey: 'pages.order' } },
+  { path: '/profile', component: ProfileView, meta: { titleKey: 'pages.profile' } },
+  { path: '/about-us', component: AboutUsView, meta: { titleKey: 'pages.about' } },
+  { path: '/contact', component: ContactView, meta: { titleKey: 'pages.contact' } },
+  { path: '/career', component: CareerView, meta: { titleKey: 'pages.careers' } },
+  { path: '/register', component: RegisterView, meta: { titleKey: 'pages.register' } },
+  { path: '/login', component: LoginView, meta: { titleKey: 'pages.login' } },
+  { path: '/orders/:orderId/payment', component: PaymentView, meta: { titleKey: 'pages.payment' } },
   {
     path: '/dashboard',
     component: DashboardView,
@@ -37,15 +44,15 @@ const routes = [
     // Children is the page content
     // When no subroute is added show the users page
     children: [
-      { path: '', component: DashboardUserView, meta: { title: 'Användare | OnlineNow Dashboard' } },
-      { path: 'users', component: DashboardUserView, meta: { title: 'Användare | OnlineNow Dashboard' } },
-      { path: 'products', component: DashboardProductView, meta: { title: 'Produkter | OnlineNow Dashboard' } },
-      { path: 'orders', component: DashboardOrderView, meta: { title: 'Beställningar | OnlineNow Dashboard' } },
-      { path: 'bookings', component: DashboardBookingView, meta: { title: 'Bokningar | OnlineNow Dashboard' } },
-      { path: 'blogs', component: DashboardBlogView, meta: { title: 'Bloggar | OnlineNow Dashboard' } },
+      { path: '', component: DashboardUserView, meta: { title: `Användare | ${brandName} Dashboard` } },
+      { path: 'users', component: DashboardUserView, meta: { title: `Användare | ${brandName} Dashboard` } },
+      { path: 'products', component: DashboardProductView, meta: { title: `Produkter | ${brandName} Dashboard` } },
+      { path: 'orders', component: DashboardOrderView, meta: { title: `Beställningar | ${brandName} Dashboard` } },
+      { path: 'bookings', component: DashboardBookingView, meta: { title: `Bokningar | ${brandName} Dashboard` } },
+      { path: 'blogs', component: DashboardBlogView, meta: { title: `Bloggar | ${brandName} Dashboard` } },
     ],
   },
-  { path: '/blogs', component: BlogsView, meta: { title: 'Blogg | OnlineNow' } },
+  { path: '/blogs', component: BlogsView, meta: { titleKey: 'pages.blog' } },
 ];
 
 const router = createRouter({
@@ -67,14 +74,6 @@ const router = createRouter({
 
     return false;
   },
-});
-
-// https://dev.to/jacobandrewsky/dynamic-page-title-and-description-with-vue-router-4oni
-router.beforeEach((to) => {
-  const { title } = to.meta;
-  const defaultTitle = 'OnlineNow';
-
-  document.title = title as string || defaultTitle;
 });
 
 // Navigation guard to ensure regular user do not visit the admin dashboard

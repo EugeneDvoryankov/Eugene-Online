@@ -6,7 +6,7 @@ import App from '../App.vue';
 describe('App', () => {
   it('mounts renders properly', () => {
     // const wrapper = mount(App);
-    // expect(wrapper.text()).toContain('ONLINENOW AB');
+    // expect(wrapper.text()).toContain('Eugene-Online');
     expect(true).toBe(true);
   });
 });

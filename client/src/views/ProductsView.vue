@@ -1,4 +1,6 @@
 <script lang="ts">
+import { formatLocale, t } from '@/i18n';
+import { translateDefaultProductText } from '@/i18n/defaultProducts';
 import { useRouter, useRoute } from 'vue-router';
 import { BButton, BCol, BContainer, BRow, useToast } from 'bootstrap-vue-next';
 import * as auth from '../services/auth';
@@ -19,6 +21,8 @@ export default {
     const toast = useToast();
 
     return {
+      t,
+      translateDefaultProductText,
       router,
       route,
       toast,
@@ -28,7 +32,7 @@ export default {
   data() {
     return {
       products: [] as Product[],
-      errorMsg: '',
+      loadFailed: false,
       selectedCategory: 'all',
     };
   },
@@ -53,14 +57,22 @@ export default {
   },
 
   methods: {
+    formatPrice(price: number) {
+      return new Intl.NumberFormat(formatLocale.value, {
+        style: 'currency',
+        currency: 'SEK',
+        minimumFractionDigits: 0,
+      }).format(price);
+    },
+
     async fetchProducts() {
-      this.errorMsg = '';
+      this.loadFailed = false;
 
       try {
         this.products = await api.getProducts();
       } catch (error) {
         console.error('Failed to fetch products:', error);
-        this.errorMsg = 'Kunde inte ladda in tjänsterna';
+        this.loadFailed = true;
       }
 
       console.log('Fetched products:', this.products);
@@ -78,8 +90,8 @@ export default {
     async handleBuy(productId: string) {
       if (!this.isLoggedIn) {
         this.toast.show({
-          title: 'Inloggning krävs',
-          body: 'Vänligen logga in för att köpa ett paket.',
+          title: t('services.loginRequired'),
+          body: t('services.loginToBuy'),
           variant: 'warning',
           pos: 'top-center',
           value: 5000,
@@ -97,8 +109,8 @@ export default {
         console.error('Purchase failed:', error);
 
         this.toast.show({
-          title: 'Ett fel uppstod',
-          body: 'Kunde inte genomföra beställningen',
+          title: t('common.error'),
+          body: t('services.orderError'),
           variant: 'danger',
           pos: 'top-center',
         });
@@ -127,21 +139,21 @@ export default {
     <!-- Page title -->
     <div class="text-center mb-4">
       <h1 class="display-4 fw-bold">
-        Våra tjänster
+        {{ t('nav.services') }}
       </h1>
 
       <p class="fs-5 products-subtitle">
-        Lösningar för ditt företags digitala resa
+        {{ t('services.intro') }}
       </p>
     </div>
 
     <!-- Error -->
     <div
-      v-if="errorMsg"
+      v-if="loadFailed"
       class="text-center"
     >
       <p class="text-danger">
-        {{ errorMsg }}
+        {{ t('services.loadError') }}
       </p>
     </div>
 
@@ -152,7 +164,7 @@ export default {
         :class="{ active: selectedCategory === 'all' }"
         @click="setCategory('all')"
       >
-        Alla
+        {{ t('services.all') }}
       </BButton>
 
       <BButton
@@ -160,7 +172,7 @@ export default {
         :class="{ active: selectedCategory === 'design' }"
         @click="setCategory('design')"
       >
-        Design
+        {{ t('services.design') }}
       </BButton>
 
       <BButton
@@ -168,7 +180,7 @@ export default {
         :class="{ active: selectedCategory === 'webdev' }"
         @click="setCategory('webdev')"
       >
-        Webbutveckling
+        {{ t('services.web') }}
       </BButton>
 
       <BButton
@@ -176,7 +188,7 @@ export default {
         :class="{ active: selectedCategory === 'consultation' }"
         @click="setCategory('consultation')"
       >
-        Konsultation
+        {{ t('services.consultation') }}
       </BButton>
 
       <BButton
@@ -184,13 +196,13 @@ export default {
         :class="{ active: selectedCategory === 'appdev' }"
         @click="setCategory('appdev')"
       >
-        Apputveckling
+        {{ t('services.app') }}
       </BButton>
     </div>
 
     <!-- Products -->
     <BRow
-      v-if="!errorMsg"
+      v-if="!loadFailed"
       class="g-4"
     >
       <BCol
@@ -214,11 +226,11 @@ export default {
           <!-- Product content -->
           <div class="p-4 flex-grow-1">
             <h2 class="h3 mb-3 fw-bold">
-              {{ product.name }}
+              {{ translateDefaultProductText(product.name) }}
             </h2>
 
             <p class="product-description">
-              {{ product.description }}
+              {{ translateDefaultProductText(product.description) }}
             </p>
           </div>
 
@@ -233,7 +245,7 @@ export default {
               "
             >
               <span class="fs-4 fw-bold">
-                {{ product.price }} kr
+                {{ formatPrice(product.price) }}
               </span>
 
               <BButton
@@ -241,7 +253,7 @@ export default {
                 size="lg"
                 @click="handleBuy(product.id)"
               >
-                Köp
+                {{ t('services.buy') }}
               </BButton>
             </div>
           </div>
