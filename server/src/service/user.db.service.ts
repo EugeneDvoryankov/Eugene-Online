@@ -2,8 +2,6 @@ import bcrypt from 'bcrypt';
 import UserModel from '../db/User.db';
 import { CreateUserInput, User } from '../model/user.interface';
 
-const ADMIN_EMAIL = 'admin@gmail.com';
-
 /* eslint-disable class-methods-use-this */
 class UserService {
   // Get all registered users
@@ -32,7 +30,7 @@ class UserService {
       phoneNumber: input.phoneNumber,
       password: hashedPassword,
       companyName: input.companyName,
-      admin: input.email === ADMIN_EMAIL,
+      admin: false,
     });
 
     return newUser.toJSON();

@@ -8,7 +8,7 @@ export default {
   },
   methods: {
     fetchBookings() {
-      return api.getBookings();
+      return api.getAdminBookings();
     },
     deleteBooking(id: string) {
       return api.deleteBooking(id);

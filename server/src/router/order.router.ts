@@ -55,6 +55,8 @@ orderRouter.get(
         return res.status(404).send('Order with this orderId does not exist');
       }
 
+      if (req.user?.id !== order.userId && !req.user?.admin) return res.sendStatus(403);
+
       return res.status(200).json(order);
     } catch (e: any) {
       if (e instanceof Error) {
@@ -124,6 +126,10 @@ orderRouter.delete(
   authenticate(),
   async (req: Request<{ orderId: string }>, res: Response<Order | string>) => {
     try {
+      const order = await orderService.getOrder(req.params.orderId);
+      if (!order) return res.status(200).end();
+      if (req.user?.id !== order.userId && !req.user?.admin) return res.sendStatus(403);
+
       try {
         await orderService.removeOrder(req.params.orderId);
         return res.status(200).end();
@@ -146,6 +152,8 @@ orderRouter.patch(
   '/:orderId/pay',
   authenticate(),
   async (req: Request<{ orderId: string }>, res: Response<Order | string>) => {
+    if (process.env.NODE_ENV === 'production') return res.sendStatus(403);
+
     try {
       if (!req.user) {
         return res.status(401).send('User is not authenticated');
@@ -156,7 +164,7 @@ orderRouter.patch(
         return res.status(404).send('Order with this orderId does not exist');
       }
 
-      if ((existing as any).userId && (existing as any).userId !== req.user.id) {
+      if (existing.userId !== req.user.id) {
         return res.status(403).send('Not allowed to pay this order');
       }
 

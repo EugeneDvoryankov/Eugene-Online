@@ -1,6 +1,7 @@
 import { beforeEach, vi } from 'vitest';
 import { User } from '../src/model/user.interface';
 import sequelize from '../src/db/conn';
+import UserModel from '../src/db/User.db';
 import userService from '../src/service/user.db.service';
 
 // Mock without a factory function will instead of loading conn.ts
@@ -33,6 +34,8 @@ beforeEach(async () => {
     password: 'password',
     companyName: 'Vandelay',
   });
+  await UserModel.update({ admin: true }, { where: { id: adminUser.id } });
+  adminUser.admin = true;
   // "admin@gmail.com:password" base64 encoded is "YWRtaW5AZ21haWwuY29tOnBhc3N3b3Jk"
   adminAuthorizationHeader = 'Basic YWRtaW5AZ21haWwuY29tOnBhc3N3b3Jk';
 });

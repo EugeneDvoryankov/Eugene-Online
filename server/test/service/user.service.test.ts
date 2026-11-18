@@ -64,7 +64,7 @@ describe('createUser', () => {
     expect(user.admin).toBe(false);
   });
 
-  test('creates admin user when using admin email', async () => {
+  test('creates a normal user regardless of email', async () => {
     const user = await userService.createUser({
       email: 'admin@gmail.com',
       phoneNumber: '123456',
@@ -72,7 +72,7 @@ describe('createUser', () => {
       companyName: 'Test Company',
     });
 
-    expect(user.admin).toBe(true);
+    expect(user.admin).toBe(false);
   });
 
   test('throws error if email already exists', async () => {

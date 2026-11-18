@@ -1,10 +1,7 @@
 import { basicToken } from './services/auth';
 import type { Booking, Product, User, Order, Blog } from './types';
 
-// const BASE_URL = 'http://localhost:8080';
-// Set API_URL in .env.development and .env.production
-const BASE_URL = import.meta.env.VITE_API_URL;
-console.log('BASE_URL', BASE_URL);
+const BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 export const getUsers: () => Promise<User[]> = async () => {
   if (!basicToken.value) {
@@ -102,7 +99,9 @@ export const loginUser: (email: string, password: string) => Promise<User> = asy
   return data;
 };
 
-export const getBookings: (options?: { from?: string; to?: string; }) => Promise<Booking[]> = async (options) => {
+export type BookedSlot = Pick<Booking, 'year' | 'month' | 'day' | 'time'>;
+
+export const getBookings: (options?: { from?: string; to?: string; }) => Promise<BookedSlot[]> = async (options) => {
   const queryParams = new URLSearchParams();
   if (options && options.from) {
     queryParams.set('from', options.from);
@@ -117,8 +116,23 @@ export const getBookings: (options?: { from?: string; to?: string; }) => Promise
     throw new Error('Could not fetch bookings');
   }
 
-  const data: Booking[] = await res.json();
+  const data: BookedSlot[] = await res.json();
   return data;
+};
+
+export const getAdminBookings = async (): Promise<Booking[]> => {
+  if (!basicToken.value) {
+    throw new Error('User is not authenticated');
+  }
+
+  const res = await fetch(`${BASE_URL}/bookings/admin`, {
+    headers: { Authorization: basicToken.value },
+  });
+  if (!res.ok) {
+    throw new Error('Could not fetch bookings');
+  }
+
+  return res.json();
 };
 
 export const getMyBookings: () => Promise<Booking[]> = async () => {

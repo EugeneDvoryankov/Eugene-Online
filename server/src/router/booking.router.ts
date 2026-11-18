@@ -7,11 +7,10 @@ import authenticate from '../middlewares/authenticate';
 
 const bookingRouter = express.Router();
 
+type BookedSlot = Pick<Booking, 'year' | 'month' | 'day' | 'time'>;
+
 bookingRouter.get(
   '/',
-  // Any user should be able to fetch bookings
-  // But they need to login or register to make a booking
-  // authenticate(),
   validate([
     query('from').optional().isISO8601(),
     query('to').optional().isISO8601(),
@@ -23,11 +22,12 @@ bookingRouter.get(
       unknown,
       { from?: string; to?: string }
     >,
-    res: Response<Booking[] | string>,
+    res: Response<BookedSlot[] | string>,
   ) => {
     try {
       const bookings = await bookingService.getBookings({ ...req.query });
-      return res.status(200).json(bookings);
+      const slots = bookings.map(({ year, month, day, time }) => ({ year, month, day, time }));
+      return res.status(200).json(slots);
     } catch (e: unknown) {
       if (e instanceof Error) {
         console.log('e', e, e.message);
@@ -35,6 +35,19 @@ bookingRouter.get(
       }
 
       return res.status(500).end();
+    }
+  },
+);
+
+bookingRouter.get(
+  '/admin',
+  authenticate({ admin: true }),
+  async (_req, res) => {
+    try {
+      const bookings = await bookingService.getBookings({});
+      return res.status(200).json(bookings);
+    } catch {
+      return res.sendStatus(500);
     }
   },
 );
@@ -74,6 +87,8 @@ bookingRouter.get(
       if (booking === null) {
         return res.status(404).send('Booking with id does not exist');
       }
+
+      if (req.user?.id !== booking.userId && !req.user?.admin) return res.sendStatus(403);
 
       return res.status(200).json(booking);
     } catch (e: unknown) {

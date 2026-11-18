@@ -11,6 +11,11 @@ import authenticate from '../middlewares/authenticate';
 
 const userRouter = express.Router();
 
+function publicUser(user: User) {
+  const { id, email, phoneNumber, companyName, admin } = user;
+  return { id, email, phoneNumber, companyName, admin };
+}
+
 /**
  * GET /users
  * Get all users
@@ -21,7 +26,7 @@ userRouter.get(
   async (req: Request, res: Response) => {
     try {
       const users = await userService.getAllUsers();
-      return res.status(200).json(users);
+      return res.status(200).json(users.map(publicUser));
     } catch (e: unknown) {
       if (e instanceof Error) {
         return res.status(500).send(e.message);
@@ -43,7 +48,8 @@ userRouter.get(
       }
 
       const user = await userService.getUser(req.user.id);
-      return res.status(200).json(user);
+      if (!user) return res.sendStatus(404);
+      return res.status(200).json(publicUser(user));
     } catch (e: unknown) {
       if (e instanceof Error) {
         return res.status(500).send(e.message);
@@ -69,7 +75,7 @@ userRouter.get(
       if (!user) {
         return res.status(404).send('User with id does not exist');
       }
-      return res.status(200).json(user);
+      return res.status(200).json(publicUser(user));
     } catch (e: unknown) {
       if (e instanceof Error) {
         return res.status(500).send(e.message);
@@ -90,11 +96,12 @@ userRouter.patch(
     checkExact(),
   ]),
   async (req: Request<{ id: string }, unknown, Partial<User>>, res: Response) => {
+    if (req.user?.id !== req.params.id && !req.user?.admin) return res.sendStatus(403);
+
     try {
       const updated = await userService.updateUser(req.params.id, req.body);
       if (!updated) return res.status(404).send('User not found');
-      const user = await userService.getUser(req.params.id);
-      return res.status(200).json(user);
+      return res.status(200).json(publicUser(updated));
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e: unknown) {
       return res.status(500).end();
@@ -113,7 +120,7 @@ userRouter.post(
   async (req, res) => {
     try {
       const user = await userService.createUser(req.body);
-      return res.status(201).json(user);
+      return res.status(201).json(publicUser(user));
     } catch (e: any) {
       return res.status(400).send(e.message);
     }
@@ -130,7 +137,7 @@ userRouter.post(
     try {
       try {
         const user = await userService.authenticateUser(email, password);
-        return res.status(200).json(user);
+        return res.status(200).json(publicUser(user));
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         return res.status(401).send({ message: 'Invalid email or password' });

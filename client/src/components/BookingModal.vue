@@ -2,7 +2,6 @@
 <!-- https://bootstrap-vue-next.github.io/bootstrap-vue-next/docs/components/modal.html -->
 <script lang="ts">
 import * as api from '@/api';
-import type { Booking } from '@/types';
 import { BButton, BCol, BContainer, BModal, BRow, useToast, type BaseColorVariant } from 'bootstrap-vue-next';
 import * as auth from '../services/auth';
 import { useRouter } from 'vue-router';
@@ -182,7 +181,7 @@ export default {
 
       return true;
     },
-    getDateTimes(currentDate: Date, bookings: Booking[]): number[] {
+    getDateTimes(currentDate: Date, bookings: api.BookedSlot[]): number[] {
       // The times available for booking
       // But you need to filter the times that are already booked by other users
       // const times = ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
@@ -227,7 +226,7 @@ export default {
     },
     async fetchBookings() {
       console.log('Fetching bookings');
-      let bookings: Booking[] = [];
+      let bookings: api.BookedSlot[] = [];
 
       try {
         bookings = await api.getBookings();

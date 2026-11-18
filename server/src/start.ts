@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import { resolve } from 'node:path';
 import bookingRouter from './router/booking.router';
 import orderRouter from './router/order.router';
 import userRouter from './router/user.router';
@@ -33,9 +34,15 @@ apiRouter.use('/orders', orderRouter);
 apiRouter.use('/users', userRouter);
 apiRouter.use('/products', productRouter);
 apiRouter.use('/blogs', blogRouter);
+apiRouter.use((_req, res) => res.sendStatus(404));
 
 // You should prefix API routes with /api especially when deploying
 // to prevent conflicts between frontend routes and API routes
 app.use('/api', apiRouter);
+
+app.get('/{*path}', (req, res, next) => {
+  if (!req.get('Accept')?.includes('text/html') || req.path.includes('.')) return next();
+  return res.sendFile(resolve('public/index.html'));
+});
 
 export default app;

@@ -4,6 +4,7 @@ WORKDIR /app
 COPY client/package*.json ./
 RUN npm install
 COPY client/ .
+ARG VITE_API_URL=/api
 RUN npm run build
 
 # Stage 2: Build backend

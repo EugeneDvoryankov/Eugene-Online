@@ -48,18 +48,19 @@ describe('GET users', () => {
           id: user.id,
           email: user.email,
           companyName: user.companyName,
-          password: user.password,
           admin: user.admin,
         }),
         expect.objectContaining({
           id: adminUser.id,
           email: adminUser.email,
           companyName: adminUser.companyName,
-          password: adminUser.password,
           admin: adminUser.admin,
         }),
       ]),
     );
+    for (const account of res.body) {
+      expect(account).not.toHaveProperty('password');
+    }
   });
 });
 
@@ -82,12 +83,12 @@ describe('GET my user', () => {
       expect.objectContaining({
         id: user.id,
         email: user.email,
-        password: user.password,
         companyName: user.companyName,
         phoneNumber: null,
         admin: false,
       }),
     );
+    expect(res.body).not.toHaveProperty('password');
   });
 });
 
@@ -176,7 +177,7 @@ describe('POST /api/users', () => {
     expect(res.body.phoneNumber).toBeUndefined();
   });
 
-  test('creates an admin user when using admin email', async () => {
+  test('creates a normal user regardless of email', async () => {
     // Delete the admin user that is created in setupFile
     await UserModel.destroy({ where: { id: adminUser.id } });
 
@@ -188,7 +189,8 @@ describe('POST /api/users', () => {
     });
 
     expect(res.statusCode).toBe(201);
-    expect(res.body.admin).toBe(true);
+    expect(res.body.admin).toBe(false);
+    expect(res.body).not.toHaveProperty('password');
   });
 
   test('returns 400 if email already exists', async () => {

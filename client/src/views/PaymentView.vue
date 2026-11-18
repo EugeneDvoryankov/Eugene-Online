@@ -9,6 +9,7 @@ import * as auth from '../services/auth';
 const route = useRoute();
 const router = useRouter();
 const toast = useToast();
+const showDemoPayment = import.meta.env.DEV;
 
 const orderId = computed(() => String(route.params.orderId ?? ''));
 
@@ -256,7 +257,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bg-light py-4">
+  <section v-if="!showDemoPayment" class="container py-5">
+    <h2>Betalning</h2>
+    <p>Kontakta oss för betalningsuppgifter och ange ditt ordernummer.</p>
+    <RouterLink to="/contact">Kontakta OnlineNow</RouterLink>
+  </section>
+  <div v-else class="bg-light py-4">
     <div class="container" style="max-width: 900px">
       <div class="py-4 text-center">
         <div class="d-flex justify-content-center align-items-center gap-2">
