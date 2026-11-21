@@ -32,12 +32,22 @@ export default {
 <template>
   <!-- WHY EUGENE-ONLINE -->
   <BContainer fluid tag="section" class="why-section py-5">
-    <div class="text-center mb-5">
-      <h2>{{ t('home.why') }}</h2>
+    <div class="landing-intro text-center mx-auto mb-5">
+      <h1>{{ t('home.why') }}</h1>
 
       <p class="why-subtitle">
         {{ t('home.intro') }}
       </p>
+
+      <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+        <BButton class="theme-primary-button" size="lg" to="/products">
+          {{ t('home.seeMyWork') }}
+        </BButton>
+
+        <BButton class="landing-contact-button" variant="outline-primary" size="lg" to="/contact">
+          {{ t('home.talkAboutWebsite') }}
+        </BButton>
+      </div>
     </div>
 
     <div class="row g-4">
@@ -165,13 +175,13 @@ export default {
           gap-3
         "
       >
-        <h1>
+        <h2 class="h1">
           {{ t('home.heroStart') }}
           <span class="fst-italic">
             {{ t('home.heroEmphasis') }}
           </span>
           {{ t('home.heroEnd') }}
-        </h1>
+        </h2>
 
         <h3 class="hero-subtitle fs-4">
           {{ t('home.heroDescription') }}
@@ -329,8 +339,23 @@ export default {
   color: var(--on-text);
 }
 
+.landing-intro {
+  max-width: 40rem;
+}
+
 .why-subtitle {
   color: var(--on-text-secondary);
+}
+
+.landing-contact-button {
+  --bs-btn-color: var(--on-primary);
+  --bs-btn-border-color: var(--on-primary);
+  --bs-btn-hover-color: var(--on-primary-text);
+  --bs-btn-hover-bg: var(--on-primary);
+  --bs-btn-hover-border-color: var(--on-primary);
+  --bs-btn-active-color: var(--on-primary-text);
+  --bs-btn-active-bg: var(--on-primary);
+  --bs-btn-active-border-color: var(--on-primary);
 }
 
 .why-icon {

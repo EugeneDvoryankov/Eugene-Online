@@ -27,8 +27,13 @@ export const messages = {
   'services.loginToBuy': {"en": "Please log in to buy a package.", "sv": "Vänligen logga in för att köpa ett paket."},
   'services.orderError': {"en": "Could not place the order", "sv": "Kunde inte genomföra beställningen"},
 
-  'home.why': {"en": `Why choose ${brandName}?`, "sv": `Varför välja ${brandName}?`},
-  'home.intro': {"en": "We build fast, flexible digital solutions that are easy to extend.", "sv": "Vi bygger moderna digitala lösningar som är snabba, flexibla och enkla att vidareutveckla."},
+  'home.why': {"en": "Tired of AI slop?", "sv": "Trött på AI-skräp?"},
+  'home.intro': {
+    "en": "I’m Eugene, a software engineer in Gothenburg. I build websites for small businesses and tailor the design, content, and features to how you work.",
+    "sv": "Jag heter Eugene och är mjukvaruingenjör i Göteborg. Jag bygger webbplatser för småföretag och anpassar design, innehåll och funktioner efter hur du jobbar.",
+  },
+  'home.seeMyWork': {"en": "See what I build", "sv": "Se vad jag bygger"},
+  'home.talkAboutWebsite': {"en": "Talk to me about your website", "sv": "Prata med mig om din webbplats"},
   'home.fast': {"en": "Fast", "sv": "Snabbt"},
   'home.fastDescription': {"en": "Modern tools and efficient development deliver fast websites and help you get from idea to launch sooner.", "sv": "Moderna tekniker och effektiv utveckling ger snabba webbplatser och kortare väg från idé till färdig produkt."},
   'home.responsive': {"en": "Responsive", "sv": "Responsivt"},

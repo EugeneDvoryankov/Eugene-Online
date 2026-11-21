@@ -123,7 +123,7 @@ export default {
   setup() {
     const router = useRouter();
 
-    const colorModeOptions = { persist: true, initialValue: 'dark' } as const;
+    const colorModeOptions = { persist: true, initialValue: 'light' } as const;
     const mode = useColorMode(colorModeOptions);
 
     function toggleTheme() {

@@ -2,7 +2,7 @@
    EUGENE-ONLINE GLOBAL THEME SYSTEM
 
    Default:
-   Dark + Black & Red
+   Light + Blue
 
    Available brand themes:
    - black-red
@@ -61,7 +61,6 @@
 
 /* =========================================================
    1. LIGHT MODE BASE
-   DEFAULT BRAND = BLACK & RED
    ========================================================= */
 
 [data-bs-theme='light'] {
@@ -103,7 +102,6 @@
 
 /* =========================================================
    2. DARK MODE BASE
-   DEFAULT BRAND = BLACK & RED
    ========================================================= */
 
 [data-bs-theme='dark'] {
@@ -300,7 +298,7 @@
    9. LIGHT + BLUE
    ========================================================= */
 
-[data-bs-theme='light'][data-brand='blue'] {
+[data-bs-theme='light']:is(:not([data-brand]), [data-brand='blue']) {
   --on-bg: #ffffff;
   --on-surface: #f4f8ff;
   --on-card-bg: #ffffff;
@@ -326,7 +324,7 @@
    10. DARK + BLUE
    ========================================================= */
 
-[data-bs-theme='dark'][data-brand='blue'] {
+[data-bs-theme='dark']:is(:not([data-brand]), [data-brand='blue']) {
   --on-bg: #06111f;
   --on-surface: #0b1b30;
   --on-card-bg: #0b1b30;
