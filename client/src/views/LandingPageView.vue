@@ -7,8 +7,7 @@ import { BButton, BContainer } from 'bootstrap-vue-next';
 
 export default {
   setup() {
-    const whatsappUrl = computed(() => `https://wa.me/46700171837?text=${encodeURIComponent(t('home.whatsappMessage'))}`);
-    return { t, whatsappUrl };
+    return { t };
   },
   components: {
     BContainer,
@@ -50,59 +49,6 @@ export default {
       </div>
     </div>
 
-    <div class="row g-4">
-      <!-- Snabbt -->
-      <div class="col-12 col-md-6 col-lg-3">
-        <div class="why-card">
-          <i class="bi bi-lightning-charge-fill why-icon">
-            {{ t('home.fast') }}
-          </i>
-
-          <p>
-            {{ t('home.fastDescription') }}
-          </p>
-        </div>
-      </div>
-
-      <!-- Responsivt -->
-      <div class="col-12 col-md-6 col-lg-3">
-        <div class="why-card">
-          <i class="bi bi-phone-fill why-icon">
-            {{ t('home.responsive') }}
-          </i>
-
-          <p>
-            {{ t('home.responsiveDescription') }}
-          </p>
-        </div>
-      </div>
-
-      <!-- Flexibelt -->
-      <div class="col-12 col-md-6 col-lg-3">
-        <div class="why-card">
-          <i class="bi bi-palette-fill why-icon">
-            {{ t('home.flexible') }}
-          </i>
-
-          <p>
-            {{ t('home.flexibleDescription') }}
-          </p>
-        </div>
-      </div>
-
-      <!-- Utbyggbart -->
-      <div class="col-12 col-md-6 col-lg-3">
-        <div class="why-card">
-          <i class="bi bi-code-slash why-icon">
-            {{ t('home.extensible') }}
-          </i>
-
-          <p>
-            {{ t('home.extensibleDescription') }}
-          </p>
-        </div>
-      </div>
-    </div>
   </BContainer>
 
   <!-- INTERACTIVE DESIGN DEMO -->
@@ -301,33 +247,6 @@ export default {
       </div>
     </BContainer>
   </BContainer>
-
-  <!-- WHATSAPP -->
-  <div class="whatsapp-container">
-    <a
-      :href="whatsappUrl"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="whatsapp-button"
-      :aria-label="t('home.whatsappLabel')"
-    >
-      <span class="whatsapp-icon">
-        <svg
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            d="M20.52 3.48A11.8 11.8 0 0012.12 0C5.58 0 .25 5.32.25 11.87c0 2.09.55 4.14 1.58 5.94L0 24l6.37-1.67a11.8 11.8 0 005.75 1.47h.01c6.54 0 11.87-5.33 11.87-11.87 0-3.17-1.23-6.15-3.48-8.45zm-8.4 18.33h-.01a9.83 9.83 0 01-5-1.36l-.36-.21-3.78.99 1.01-3.69-.24-.38a9.86 9.86 0 01-1.52-5.29C2.22 6.39 6.65 1.96 12.12 1.96c2.63 0 5.11 1.03 6.97 2.89a9.79 9.79 0 012.89 6.97c0 5.46-4.44 9.99-9.86 9.99zm5.41-7.41c-.3-.15-1.76-.87-2.04-.97-.27-.1-.47-.15-.66.15-.19.3-.76.97-.93 1.17-.17.2-.34.22-.64.07-.3-.15-1.24-.46-2.36-1.46-.87-.77-1.46-1.73-1.63-2.02-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.5.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.66-1.6-.91-2.19-.24-.58-.48-.5-.66-.5h-.56c-.2 0-.52.08-.8.37-.27.3-1.04 1.01-1.04 2.46 0 1.45 1.07 2.85 1.22 3.05.15.2 2.08 3.18 5.05 4.46.71.31 1.27.49 1.7.63.72.23 1.38.2 1.9.12.58-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.4-.07-.12-.27-.2-.57-.35z"
-          />
-        </svg>
-      </span>
-
-      <span class="whatsapp-text">
-        {{ t('home.chat') }}
-      </span>
-    </a>
-  </div>
 </template>
 
 <style scoped>
@@ -768,71 +687,6 @@ export default {
 }
 
 
-/* =========================================================
-   WHATSAPP
-   ========================================================= */
-
-.whatsapp-container {
-  position: fixed;
-
-  right: 24px;
-  bottom: 24px;
-
-  z-index: 1050;
-}
-
-.whatsapp-button {
-  display: flex;
-  align-items: center;
-
-  gap: 10px;
-
-  padding: 12px 18px;
-
-  border: 1px solid #42e47f;
-  border-radius: 999px;
-
-  background-color: #25d366;
-  color: #000000;
-
-  text-decoration: none;
-  font-weight: 700;
-
-  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.35);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.whatsapp-button:hover {
-  color: #000000;
-
-  transform: translateY(-3px);
-
-  box-shadow: 0 16px 38px rgba(37, 211, 102, 0.5);
-}
-
-.whatsapp-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 30px;
-  height: 30px;
-
-  padding: 6px;
-
-  border-radius: 50%;
-
-  background-color: rgba(0, 0, 0, 0.12);
-}
-
-.whatsapp-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
 
 /* =========================================================
    RESPONSIVE
@@ -858,35 +712,6 @@ export default {
 @media (min-width: 992px) {
   .reference-company {
     padding: 2rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .whatsapp-container {
-    right: 16px;
-    bottom: 16px;
-  }
-
-  .whatsapp-button {
-    width: 56px;
-    height: 56px;
-
-    padding: 13px;
-
-    justify-content: center;
-  }
-
-  .whatsapp-icon {
-    width: 30px;
-    height: 30px;
-
-    padding: 3px;
-
-    background: transparent;
-  }
-
-  .whatsapp-text {
-    display: none;
   }
 }
 </style>

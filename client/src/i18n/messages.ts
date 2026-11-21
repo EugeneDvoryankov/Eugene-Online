@@ -29,8 +29,10 @@ export const messages = {
 
   'home.why': {"en": "Tired of AI slop?", "sv": "Trött på AI-skräp?"},
   'home.intro': {
-    "en": "I’m Eugene, a software engineer in Gothenburg. I build websites for small businesses and tailor the design, content, and features to how you work.",
-    "sv": "Jag heter Eugene och är mjukvaruingenjör i Göteborg. Jag bygger webbplatser för småföretag och anpassar design, innehåll och funktioner efter hur du jobbar.",
+    "en": "So am I. That's why I decided to provide my customers with high quality webpages for affordable prices. Want to learn more?",
+    //"en": "I’m Eugene, a software engineer from Gothenburg, Sweden. I build websites for small businesses and tailor the design, content, and features to how you work.",
+    "sv" : "Det är jag också. Därför bestämde jag mig för att sälja mina kunder webbsidor av hög kvalitet till rimliga priser. Vill du veta mer?",
+    //"sv": "Jag heter Eugene och är mjukvaruingenjör i Göteborg. Jag bygger webbplatser för småföretag och anpassar design, innehåll och funktioner efter hur du jobbar.",
   },
   'home.seeMyWork': {"en": "See what I build", "sv": "Se vad jag bygger"},
   'home.talkAboutWebsite': {"en": "Talk to me about your website", "sv": "Prata med mig om din webbplats"},
